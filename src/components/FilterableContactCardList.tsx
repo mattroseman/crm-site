@@ -17,22 +17,22 @@ export default class FilterableContactCardList extends React.Component<Filterabl
         this.state = {
             contacts: this.props.contacts,
         };
+
+        this.handleSearchInput = this.handleSearchInput.bind(this);
     }
 
     handleSearchInput(search: string) {
-        // TODO filter the contacts list to just those that have been searched
         this.setState({
-            contacts: this.state.contacts.filter((contact) => {
-                return (contact.firstName.indexOf(search) !== -1 || 
-                    contact.lastName.indexOf(search) !== -1);
-            }),
+            contacts: search ? this.props.contacts.filter((contact) => { 
+                return (contact.firstName + ' ' + contact.lastName).toUpperCase().indexOf(search.toUpperCase()) !== -1;
+            }) : this.props.contacts,
         });
     }
 
     render() {
         return (
             <div className="filterable-contact-card-list">
-                <ContactSearchBar onInput={(search: string) => handleSearchInput(search)}/>
+                <ContactSearchBar onChange={this.handleSearchInput}/>
                 <ContactCardList contacts={this.state.contacts} />
             </div>
         );
