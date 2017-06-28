@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './index.css';
-import FilterableContactCardList from './components/FilterableContactCardList';
+import ContactManagement from './components/ContactManagement';
 
 let testContactList = [
     {
@@ -19,6 +19,6 @@ let testContactList = [
 ];
 
 ReactDOM.render(
-    <FilterableContactCardList contacts={testContactList} />,
+    <ContactManagement initialContacts={testContactList} />,
     document.getElementById("root")
 );

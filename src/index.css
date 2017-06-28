@@ -7,45 +7,50 @@ ol, ul {
   padding-left: 30px;
 }
 
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
+/* ContactManagement */
+.contact-management {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
 }
 
-.status {
-  margin-bottom: 10px;
+/* FilterableContactCardList */
+.filterable-contact-card-list {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
 }
 
-.square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 34px;
+/* AddContactForm */
+.add-contact-form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
-.square:focus {
-  outline: none;
+.add-contact-label-field {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
 }
 
-.kbd-navigation .square:focus {
-  background: #ddd;
+.add-contact-label, .add-contact-field {
+    display: flex;
 }
 
-.game {
-  display: flex;
-  flex-direction: row;
+.add-contact-label {
+    flex: 1;
+    align-items: left;
 }
 
-.game-info {
-  margin-left: 20px;
+.add-contact-field {
+    flex: 3;
+    align-items: stretch;
 }
 
+.add-contact-submit {
+    display: flex;
+    align-items: right;
+    width: 100px;
+}
