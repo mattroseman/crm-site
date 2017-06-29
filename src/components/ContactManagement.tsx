@@ -7,12 +7,35 @@ export interface ContactManagementProps {
     initialContacts: Contact[];
 }
 
-export default class ContactManagement extends React.Component<ContactManagementProps, undefined> {
+export interface ContactManagementState {
+    contacts: Contact[];
+}
+
+
+export default class ContactManagement extends React.Component<ContactManagementProps, ContactManagementState> {
+    constructor(props: ContactManagementProps) {
+        super(props);
+        this.state = {
+            contacts: props.initialContacts,
+        };
+
+        this.handleNewContact = this.handleNewContact.bind(this);
+    }
+
+
+    handleNewContact(contact: Contact) {
+        let newContacts: Contact[] = this.state.contacts;
+        newContacts.push(contact);
+        this.setState({
+            contacts: newContacts,
+        });
+    }
+
     render() {
         return (
             <div className="contact-management">
-                <FilterableContactCardList contacts={this.props.initialContacts} />
-                <AddContactForm />
+                <FilterableContactCardList contacts={this.state.contacts} />
+                <AddContactForm onSubmit={this.handleNewContact} />
             </div>
         );
     }

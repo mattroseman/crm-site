@@ -28,7 +28,6 @@ export default class ContactSearchBar extends React.Component<ContactSearchBarPr
                     }}
                     maxLength={100} 
                 />
-                <input className="contact-search-submit" type="submit" value="Submit" />
             </form>
         );
     }

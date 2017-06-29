@@ -41,7 +41,7 @@ ol, ul {
 
 .add-contact-label {
     flex: 1;
-    align-items: left;
+    align-items: flex-start;
 }
 
 .add-contact-field {
@@ -51,6 +51,6 @@ ol, ul {
 
 .add-contact-submit {
     display: flex;
-    align-items: right;
+    align-items: flex-end;
     width: 100px;
 }
