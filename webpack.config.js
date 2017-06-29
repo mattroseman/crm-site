@@ -15,12 +15,9 @@ module.exports = {
 
     module: {
         rules: [
-            // All files with a .css extension will be handled by 
-            { test: /\.css$/, loader: "style-loader!css-loader" },
-            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+            { test: /\.scss$/, loader: "style-loader!css-loader!sass-loader" },
             { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
     },

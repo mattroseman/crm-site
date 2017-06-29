@@ -11,11 +11,13 @@ export default class ContactCardList extends React.Component<ContactCardListProp
         const contactList = this.props.contacts.map((contact: Contact) => {
             let fn = contact.firstName;
             let ln = contact.lastName;
-            return (<ContactCard key={fn+ln} firstName={fn} lastName={ln} />);
+            let email = contact.email[0];
+            let company = contact.company[0];
+            return (<ContactCard key={fn+ln} firstName={fn} lastName={ln} email={email} company={company}/>);
         });
 
         return (
-            <ul className="contact-card-list">{contactList}</ul>
+            <div className="contact-card-list">{contactList}</div>
         );
     }
 }

@@ -34,8 +34,8 @@ export default class ContactManagement extends React.Component<ContactManagement
     render() {
         return (
             <div className="contact-management">
-                <FilterableContactCardList contacts={this.state.contacts} />
                 <AddContactForm onSubmit={this.handleNewContact} />
+                <FilterableContactCardList contacts={this.state.contacts} />
             </div>
         );
     }

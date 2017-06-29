@@ -1,29 +1,33 @@
 import * as React from 'react';
 import Contact from '../types/Contact';
-import AddContactField from './AddContactField';
+import AddContactField from './ContactField';
 
 
-export interface AddContactFormProps {
+export interface ContactFormProps {
+    title: string;
+    initialContact: Contact;
     onSubmit: (contact: Contact) => void;
 }
 
-export interface AddContactFormState {
+export interface ContactFormState {
     [key: string]: string
     firstName: string;
     lastName: string;
     email?: string;
+    company?: string;
     phone?: string;
     birthday?: string;
     lastContacted?: string;
     notes?: string;
 }
 
-export default class AddContactForm extends React.Component<AddContactFormProps, AddContactFormState> {
-    constructor(props: AddContactFormProps) {
+export default class ContactForm extends React.Component<ContactFormProps, ContactFormState> {
+    constructor(props: ContactFormProps) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
+            firstName: this.props.initialContact.firstName,
+            lastName: this.props.initialContact.firstName,
+            // TODO have this component work for add or edit
         };
 
         this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -31,7 +35,7 @@ export default class AddContactForm extends React.Component<AddContactFormProps,
     }
 
     handleFieldChange(name: string, value: string) {
-        let newState: AddContactFormState = this.state;
+        let newState: ContactFormState = this.state;
         newState[name] = value;
         this.setState(newState);
     }
@@ -52,44 +56,43 @@ export default class AddContactForm extends React.Component<AddContactFormProps,
     render() {
         return (
             <form className="add-contact-form" onSubmit={this.handleSubmit}>
+                <h1 className="add-contact-form-title">{this.props.title}</h1>
                 <AddContactField 
-                    ref="firstName" 
                     name="firstName" 
                     label="First Name:" 
                     handleChange={this.handleFieldChange}
                 />
                 <AddContactField 
-                    ref="lastName" 
                     name="lastName" 
                     label="Last Name:" 
                     handleChange={this.handleFieldChange}
                 />
                 <AddContactField 
-                    ref="email" 
                     name="email" 
                     label="Email:" 
                     handleChange={this.handleFieldChange}
                 />
+                <AddContactField
+                    name="company"
+                    label="Company:"
+                    handleChange={this.handleFieldChange}
+                />
                 <AddContactField 
-                    ref="phone" 
                     name="phone" 
                     label="Phone:" 
                     handleChange={this.handleFieldChange}
                 />
                 <AddContactField 
-                    ref="birthday" 
                     name="birthday" 
                     label="Birthday:" 
                     handleChange={this.handleFieldChange}
                 />
                 <AddContactField 
-                    ref="lastContacted" 
                     name="lastContacted" 
                     label="Last Contacted:" 
                     handleChange={this.handleFieldChange}
                 />
                 <AddContactField 
-                    ref="notes" 
                     name="notes" 
                     label="Notes:" 
                     handleChange={this.handleFieldChange}

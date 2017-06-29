@@ -1,0 +1,122 @@
+$primary-color: #553344;
+$secondary-color: #ffaa00;
+$light-grey: #F9F9F8;
+$dark-grey: #45413D;
+$white: #FFFFFF;
+
+html, body, #root {
+  font: 20px "Century Gothic", Futura, sans-serif;
+  color: $dark-grey;
+  background-color: $light-grey;
+  height: 100%;
+  margin: 0;
+}
+
+input[type="text"] {
+    font-size: 20px;
+}
+
+input[type="submit"] {
+    font-size: 15px;
+}
+
+/* ContactManagement */
+.contact-management {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    align-items: stretch;
+    height: 100%;
+}
+
+/* FilterableContactCardList */
+.filterable-contact-card-list {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: stretch;
+    padding: 30px;
+    padding-left: 50px;
+    background-color: $primary-color;
+}
+
+/* ContactSearchBar */
+.contact-search-bar {
+    margin-bottom: 20px;
+}
+
+/* ContactCardList */
+.contact-card-list {
+    list-style-type: none;
+}
+
+/* ContactCard */
+.contact-card {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    background-color: $light-grey;
+    margin-bottom: 10px;
+    box-shadow: 10px 10px 5px #443344;
+    align-items: stretch;
+}
+
+.contact-card-info {
+    display: flex;
+    flex: 3;
+    padding: 10px;
+}
+
+.contact-card-status {
+    display: flex;
+    flex: 1;
+    background-color: $secondary-color;
+}
+
+/* AddContactForm */
+.add-contact-form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: $light-grey;
+    padding: 20px;
+}
+
+.add-contact-form-title {
+    display: flex;
+    color: $secondary-color;
+    align-self: center;
+}
+
+.add-contact-label-field {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.add-contact-label, .add-contact-field {
+    display: flex;
+}
+
+.add-contact-label {
+    flex: 1;
+    align-items: flex-start;
+}
+
+.add-contact-field {
+    flex: 3;
+    align-items: stretch;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid $secondary-color
+}
+
+.add-contact-submit {
+    display: flex;
+    align-self: flex-end;
+    height: 45px;
+    width: 150px;
+    background-color: $secondary-color;
+    outline: 0 !important;
+}

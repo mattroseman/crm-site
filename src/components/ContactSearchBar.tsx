@@ -16,19 +16,17 @@ export default class ContactSearchBar extends React.Component<ContactSearchBarPr
 
     render() {
         return (
-            <form>
-                <input 
-                    className="contact-search-bar" 
-                    type="text" 
-                    value={this.state.inputValue}
-                    onChange={(event) => {
-                        this.setState({
-                            inputValue: event.target.value,
-                        }, () => this.props.onChange(this.state.inputValue));
-                    }}
-                    maxLength={100} 
-                />
-            </form>
+            <input 
+                className="contact-search-bar" 
+                type="text" 
+                value={this.state.inputValue}
+                onChange={(event) => {
+                    this.setState({
+                        inputValue: event.target.value,
+                    }, () => this.props.onChange(this.state.inputValue));
+                }}
+                maxLength={100} 
+            />
         );
     }
 }
