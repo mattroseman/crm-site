@@ -112,6 +112,26 @@ input[type="submit"] {
     border-bottom: 1px solid $secondary-color
 }
 
+.add-contact-array-fields {
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+}
+
+.add-contact-array-field-element {
+    display: flex;
+    flex-direction: row;
+}
+
+.add-contact-array-field {
+}
+
+.add-contact-array-field-button {
+    margin-left: 10px;
+    width: 30px;
+    background-color: $secondary-color;
+}
+
 .add-contact-submit {
     display: flex;
     align-self: flex-end;

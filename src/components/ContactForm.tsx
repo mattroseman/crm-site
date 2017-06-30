@@ -1,101 +1,161 @@
 import * as React from 'react';
 import Contact from '../types/Contact';
-import AddContactField from './ContactField';
+import StringField from './contact_fields/StringField';
+import StringArrayField from './contact_fields/StringArrayField';
+//import DateField from './contact_fields/DateField';
 
 
 export interface ContactFormProps {
-    title: string;
-    initialContact: Contact;
+    newContact: boolean;
+    initialContact?: Contact;
     onSubmit: (contact: Contact) => void;
 }
 
+//export interface ContactFormState {
+//    [key: string]: string
+//    firstName: string;
+//    lastName: string;
+//    email?: string;
+//    company?: string;
+//    phone?: string;
+//    birthday?: string;
+//    lastContacted?: string;
+//    notes?: string;
+//}
+
 export interface ContactFormState {
-    [key: string]: string
-    firstName: string;
-    lastName: string;
-    email?: string;
-    company?: string;
-    phone?: string;
-    birthday?: string;
-    lastContacted?: string;
-    notes?: string;
+    title: string;
+    contact: Contact;
 }
 
 export default class ContactForm extends React.Component<ContactFormProps, ContactFormState> {
     constructor(props: ContactFormProps) {
         super(props);
         this.state = {
-            firstName: this.props.initialContact.firstName,
-            lastName: this.props.initialContact.firstName,
-            // TODO have this component work for add or edit
+            title: props.newContact ? 'Add Contact' : 'Edit Contact',
+            contact: props.initialContact ? props.initialContact : { firstName: '', lastName: '' },
         };
 
-        this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.handleFirstNameFieldChange = this.handleFirstNameFieldChange.bind(this);
+        this.handleLastNameFieldChange = this.handleLastNameFieldChange.bind(this);
+        this.handleEmailFieldChange = this.handleEmailFieldChange.bind(this);
+        this.handleCompanyFieldChange = this.handleCompanyFieldChange.bind(this);
+        this.handlePhoneFieldChange = this.handlePhoneFieldChange.bind(this);
+        //this.handleBirthdayFieldChange = this.handleBirthdayFieldChange.bind(this);
+        //this.handleLastContactedFieldChange = this.handleLastContactedFieldChange.bind(this);
+        this.handleNotesFieldChange = this.handleNotesFieldChange.bind(this);
+
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleFieldChange(name: string, value: string) {
-        let newState: ContactFormState = this.state;
-        newState[name] = value;
-        this.setState(newState);
+    // TODO I can't think of a better way of handling the different forms of input here, then to have
+    // a function for each field. It is a bit repetitive, but it works for now.
+    handleFirstNameFieldChange(value: string) {
+        let newContact = this.state.contact
+        newContact.firstName = value;
+        this.setState({
+            contact: newContact,
+        });
+    }
+
+    handleLastNameFieldChange(value: string) {
+        let newContact = this.state.contact
+        newContact.lastName = value;
+        this.setState({
+            contact: newContact,
+        });
+    }
+
+    handleEmailFieldChange(value: string[]) {
+        let newContact = this.state.contact
+        newContact.email = value;
+        this.setState({
+            contact: newContact,
+        });
+    }
+
+    handleCompanyFieldChange(value: string[]) {
+        let newContact = this.state.contact
+        newContact.company = value;
+        this.setState({
+            contact: newContact,
+        });
+    }
+
+    handlePhoneFieldChange(value: string[]) {
+        let newContact = this.state.contact
+        newContact.phone = value;
+        this.setState({
+            contact: newContact,
+        });
+    }
+
+    // handleBirthdayFieldChange(value: Date) {
+    //     let newContact = this.state.contact
+    //     newContact.birthday = value;
+    //     this.setState({
+    //         contact: newContact,
+    //     });
+    // }
+
+    // handleLastContactedFieldChange(value: Date) {
+    //     let newContact = this.state.contact
+    //     newContact.lastContacted = value;
+    //     this.setState({
+    //         contact: newContact,
+    //     });
+    // }
+
+    handleNotesFieldChange(value: string[]) {
+        let newContact = this.state.contact
+        newContact.notes = value;
+        this.setState({
+            contact: newContact,
+        });
     }
 
     handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        let contact: Contact = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: [this.state.email],
-            phone: [this.state.phone],
-            //TODO handle converting string date to class CalendarDate
-        };
-        this.props.onSubmit(contact);
+        // TODO validate all the input before adding it to state
+        this.props.onSubmit(this.state.contact);
 
         event.preventDefault();
     }
 
     render() {
+        // <DateField
+        //     label="Birthday:" 
+        //     handleChange={this.handleBirthdayFieldChange}
+        // />
+        // <DateField
+        //     label="Last Contacted:" 
+        //     handleChange={this.handleLastContactedFieldChange}
+        // />
         return (
             <form className="add-contact-form" onSubmit={this.handleSubmit}>
-                <h1 className="add-contact-form-title">{this.props.title}</h1>
-                <AddContactField 
-                    name="firstName" 
+                <h1 className="add-contact-form-title">{this.state.title}</h1>
+                <StringField
                     label="First Name:" 
-                    handleChange={this.handleFieldChange}
+                    handleChange={this.handleFirstNameFieldChange}
                 />
-                <AddContactField 
-                    name="lastName" 
+                <StringField
                     label="Last Name:" 
-                    handleChange={this.handleFieldChange}
+                    handleChange={this.handleLastNameFieldChange}
                 />
-                <AddContactField 
-                    name="email" 
+                <StringArrayField
                     label="Email:" 
-                    handleChange={this.handleFieldChange}
+                    handleChange={this.handleEmailFieldChange}
                 />
-                <AddContactField
-                    name="company"
+                <StringArrayField
                     label="Company:"
-                    handleChange={this.handleFieldChange}
+                    handleChange={this.handleCompanyFieldChange}
                 />
-                <AddContactField 
-                    name="phone" 
+                <StringArrayField
                     label="Phone:" 
-                    handleChange={this.handleFieldChange}
+                    handleChange={this.handlePhoneFieldChange}
                 />
-                <AddContactField 
-                    name="birthday" 
-                    label="Birthday:" 
-                    handleChange={this.handleFieldChange}
-                />
-                <AddContactField 
-                    name="lastContacted" 
-                    label="Last Contacted:" 
-                    handleChange={this.handleFieldChange}
-                />
-                <AddContactField 
-                    name="notes" 
+                <StringArrayField
                     label="Notes:" 
-                    handleChange={this.handleFieldChange}
+                    handleChange={this.handleNotesFieldChange}
                 />
 
                 <input 

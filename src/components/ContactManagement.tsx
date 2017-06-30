@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Contact from '../types/Contact';
 import FilterableContactCardList from './FilterableContactCardList';
-import AddContactForm from './AddContactForm';
+import ContactForm from './ContactForm';
 
 export interface ContactManagementProps {
     initialContacts: Contact[];
@@ -34,7 +34,7 @@ export default class ContactManagement extends React.Component<ContactManagement
     render() {
         return (
             <div className="contact-management">
-                <AddContactForm onSubmit={this.handleNewContact} />
+                <ContactForm newContact={true} onSubmit={this.handleNewContact} />
                 <FilterableContactCardList contacts={this.state.contacts} />
             </div>
         );
