@@ -26,10 +26,11 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
     }
 
     // TODO figure out adding and deleting array field elements
+    // Possibly have uneditable fields below the single editable one
     render() {
         const stringArrayFieldList = this.state.value.map((value: string, index: number) => {
             return (
-                <div key={index} className="add-contact-array-field-element">
+                <div key={index.toString()} className="add-contact-array-field-element">
                     <StringArrayFieldElement 
                         arrayIndex={index} 
                         handleChange={this.handleArrayFieldElementChange} 
@@ -38,12 +39,14 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
                         className="add-contact-array-field-button" 
                         type="button"
                         onClick={() => {
-                            let newState = this.state;
-                            newState.value.push('');
-                            this.setState(newState);
+                            let newValue = this.state.value;
+                            newValue.push('');
+                            this.setState({
+                                value: newValue,
+                            });
                         }}
                     >
-                        {index ? 'x' : '+'}
+                        {index == this.state.value.length-1 ? '+' : 'x'}
                     </button>
                 </div>
             );
