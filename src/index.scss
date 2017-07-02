@@ -4,6 +4,12 @@ $light-grey: #F9F9F8;
 $dark-grey: #45413D;
 $white: #FFFFFF;
 
+/* React Dates */
+$react-dates-color-primary: $primary-color;
+$react-dates-color-secondary: $secondary-color;
+@import '../node_modules/react-dates/css/variables.scss';
+@import '../node_modules/react-dates/css/styles.scss';
+
 html, body, #root {
   font: 20px "Century Gothic", Futura, sans-serif;
   color: $dark-grey;

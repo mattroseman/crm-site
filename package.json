@@ -13,11 +13,15 @@
   "author": "Matthew Roseman",
   "license": "ISC",
   "dependencies": {
+    "@types/moment": "^2.13.0",
     "@types/react": "^15.0.31",
+    "@types/react-addons-shallow-compare": "^0.14.20",
     "@types/react-dom": "^15.5.1",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "react": "^15.6.1",
-    "react-dates": "^12.2.1",
+    "react-addons-shallow-compare": "^15.6.0",
+    "react-dates": "^12.2.2",
     "react-dom": "^15.6.1"
   },
   "devDependencies": {

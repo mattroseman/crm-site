@@ -2,7 +2,7 @@ import * as React from 'react';
 import Contact from '../types/Contact';
 import StringField from './contact_fields/StringField';
 import StringArrayField from './contact_fields/StringArrayField';
-//import DateField from './contact_fields/DateField';
+import DateField from './contact_fields/DateField';
 
 
 export interface ContactFormProps {
@@ -41,8 +41,8 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
         this.handleEmailFieldChange = this.handleEmailFieldChange.bind(this);
         this.handleCompanyFieldChange = this.handleCompanyFieldChange.bind(this);
         this.handlePhoneFieldChange = this.handlePhoneFieldChange.bind(this);
-        //this.handleBirthdayFieldChange = this.handleBirthdayFieldChange.bind(this);
-        //this.handleLastContactedFieldChange = this.handleLastContactedFieldChange.bind(this);
+        this.handleBirthdayFieldChange = this.handleBirthdayFieldChange.bind(this);
+        this.handleLastContactedFieldChange = this.handleLastContactedFieldChange.bind(this);
         this.handleNotesFieldChange = this.handleNotesFieldChange.bind(this);
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -90,21 +90,21 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
         });
     }
 
-    // handleBirthdayFieldChange(value: Date) {
-    //     let newContact = this.state.contact
-    //     newContact.birthday = value;
-    //     this.setState({
-    //         contact: newContact,
-    //     });
-    // }
+    handleBirthdayFieldChange(value: Date) {
+        let newContact = this.state.contact
+        newContact.birthday = value;
+        this.setState({
+            contact: newContact,
+        });
+    }
 
-    // handleLastContactedFieldChange(value: Date) {
-    //     let newContact = this.state.contact
-    //     newContact.lastContacted = value;
-    //     this.setState({
-    //         contact: newContact,
-    //     });
-    // }
+    handleLastContactedFieldChange(value: Date) {
+        let newContact = this.state.contact
+        newContact.lastContacted = value;
+        this.setState({
+            contact: newContact,
+        });
+    }
 
     handleNotesFieldChange(value: string[]) {
         let newContact = this.state.contact
@@ -122,14 +122,6 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
     }
 
     render() {
-        // <DateField
-        //     label="Birthday:" 
-        //     handleChange={this.handleBirthdayFieldChange}
-        // />
-        // <DateField
-        //     label="Last Contacted:" 
-        //     handleChange={this.handleLastContactedFieldChange}
-        // />
         return (
             <form className="add-contact-form" onSubmit={this.handleSubmit}>
                 <h1 className="add-contact-form-title">{this.state.title}</h1>
@@ -152,6 +144,14 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                 <StringArrayField
                     label="Phone:" 
                     handleChange={this.handlePhoneFieldChange}
+                />
+                <DateField
+                    label="Birthday:" 
+                    handleChange={this.handleBirthdayFieldChange}
+                />
+                <DateField
+                    label="Last Contacted:" 
+                    handleChange={this.handleLastContactedFieldChange}
                 />
                 <StringArrayField
                     label="Notes:" 
