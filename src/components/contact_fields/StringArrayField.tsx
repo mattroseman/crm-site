@@ -124,6 +124,7 @@ class StringArrayFieldElement extends React.Component<StringArrayFieldElementPro
                 <textarea
                     className="add-contact-field add-contact-array-field muliline-array-field"
                     type="text"
+                    rows={3}
                     onChange={this.handleTextAreaChange}
                 />
             );

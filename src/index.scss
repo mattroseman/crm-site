@@ -32,7 +32,7 @@ html, body, #root {
   margin: 0;
 }
 
-input[type="text"] {
+input[type="text"], textarea[type="text"] {
     font-size: 20px;
 }
 
@@ -148,8 +148,10 @@ input[type="submit"] {
 
 .add-contact-array-field-button {
     margin-left: 10px;
+    height: 30px;
     width: 30px;
     background-color: $secondary-color;
+    align-self: center;
 }
 
 .add-contact-submit {
