@@ -30,7 +30,8 @@ export default class DateField extends React.Component<DateFieldProps, DateField
                         showDefaultInputIcon
                         showClearDate
                         hideKeyboardShortcutsPanel
-                        date={this.state.value}
+                        isOutsideRange={() => {return false;}}
+                        date={null}
                         onDateChange={(date) => {
                             this.setState({
                                 value: date,
