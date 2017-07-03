@@ -4,7 +4,6 @@ import * as _ from 'lodash';
 export interface StringArrayFieldProps {
     label: string;
     handleChange: (value: string[]) => void;
-    isMultiline?: boolean;
 }
 
 export interface StringArrayFieldState {
@@ -70,7 +69,6 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
                                     firstElement={index == 0} 
                                     handleChange={this.handleArrayFieldElementChange}
                                     handleButton={index ? this.handleDeleteButtonPress : this.handleAddButtonPress}
-                                    isMultiline={this.props.isMultiline ? true : false}
                                 />
                             );
                         })
@@ -87,7 +85,6 @@ interface StringArrayFieldElementProps {
     firstElement: boolean;
     handleChange: (uuid: string, newValue: string) => void;
     handleButton: (uuid: string) => void;
-    isMultiline: boolean;
 }
 
 interface StringArrayFieldElementState {
@@ -100,46 +97,21 @@ class StringArrayFieldElement extends React.Component<StringArrayFieldElementPro
         this.state = {
             value: props.initValue,
         };
-
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
-    }
-
-    handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({
-            value: event.target.value,
-        }, () => this.props.handleChange(this.props.uuid, this.state.value));
-    }
-
-    handleTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
-        this.setState({
-            value: event.target.value,
-        }, () => this.props.handleChange(this.props.uuid, this.state.value));
     }
 
     render() {
-        let InputField: JSX.Element;
-        if (this.props.isMultiline) {
-            InputField = (
-                <textarea
-                    className="add-contact-field add-contact-array-field muliline-array-field"
-                    type="text"
-                    onChange={this.handleTextAreaChange}
-                />
-            );
-        } else {
-            InputField = (
+        return (
+            <div key={this.props.uuid} className="add-contact-array-field-element">
                 <input
                     className="add-contact-field add-contact-array-field"
                     type="text"
-                    maxLength={30}
-                    onChange={this.handleInputChange}
+                    maxLength={40}
+                    onChange={(event) => {
+                        this.setState({
+                            value: event.target.value,
+                        }, () => this.props.handleChange(this.props.uuid, this.state.value));
+                    }}
                 />
-            );
-        }
-        return (
-            <div key={this.props.uuid} className="add-contact-array-field-element">
-                {InputField}
                 <button
                     className="add-contact-array-field-button"
                     type="button"

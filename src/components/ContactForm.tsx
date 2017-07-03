@@ -143,6 +143,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                 <StringArrayField
                     label="Notes:" 
                     handleChange={this.handleNotesFieldChange}
+                    isMultiline
                 />
 
                 <input 
