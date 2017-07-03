@@ -20,6 +20,8 @@ $react-dates-color-focus: $secondary-color;
 }
 .DateInput {
     background: $light-grey;
+    padding: 0px;
+    font-size: 20px;
 }
 
 html, body, #root {
