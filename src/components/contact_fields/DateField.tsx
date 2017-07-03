@@ -28,6 +28,8 @@ export default class DateField extends React.Component<DateFieldProps, DateField
                         id={this.props.label}
                         numberOfMonths={1}
                         showDefaultInputIcon
+                        showClearDate
+                        hideKeyboardShortcutsPanel
                         date={this.state.value}
                         onDateChange={(date) => {
                             this.setState({

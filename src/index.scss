@@ -7,8 +7,20 @@ $white: #FFFFFF;
 /* React Dates */
 $react-dates-color-primary: $primary-color;
 $react-dates-color-secondary: $secondary-color;
+$react-dates-color-focus: $secondary-color;
 @import '../node_modules/react-dates/css/variables.scss';
 @import '../node_modules/react-dates/css/styles.scss';
+.SingleDatePickerInput {
+    background-color: $light-grey;
+    border: 0px;
+}
+.SingleDatePickerInput__clear-date:focus,
+.SingleDatePickerInput__clear-date--hover {
+    background: $light-grey;
+}
+.DateInput {
+    background: $light-grey;
+}
 
 html, body, #root {
   font: 20px "Century Gothic", Futura, sans-serif;
