@@ -16,9 +16,10 @@ export interface DateFieldState {
 export default class DateField extends React.Component<DateFieldProps, DateFieldState> {
     constructor(props: DateFieldProps) {
         super(props);
-        this.state = { value: moment(), focused: false, };
+        this.state = { value: null, focused: false, };
     }
 
+    //date={null}
     render() {
         return (
             <div className="add-contact-label-field">
@@ -29,16 +30,16 @@ export default class DateField extends React.Component<DateFieldProps, DateField
                         numberOfMonths={1}
                         showDefaultInputIcon
                         showClearDate
+                        date={this.state.value}
+                        isOutsideRange={(date: moment.Moment) => { return date.isAfter(new Date(), 'day'); }}
                         hideKeyboardShortcutsPanel
-                        isOutsideRange={() => {return false;}}
-                        date={null}
                         onDateChange={(date) => {
                             this.setState({
                                 value: date,
                             }, () => {this.props.handleChange(this.state.value.toDate())});
                         }}
                         focused={this.state.focused}
-                        onFocusChange={({ focused }) => this.setState({ focused })}
+                        onFocusChange={(arg: {focused: boolean}) => this.setState({ focused: arg.focused })}
                     />
                 </div>
             </div>

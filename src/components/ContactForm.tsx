@@ -41,7 +41,6 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
         this.handleEmailFieldChange = this.handleEmailFieldChange.bind(this);
         this.handleCompanyFieldChange = this.handleCompanyFieldChange.bind(this);
         this.handlePhoneFieldChange = this.handlePhoneFieldChange.bind(this);
-        this.handleBirthdayFieldChange = this.handleBirthdayFieldChange.bind(this);
         this.handleLastContactedFieldChange = this.handleLastContactedFieldChange.bind(this);
         this.handleNotesFieldChange = this.handleNotesFieldChange.bind(this);
 
@@ -85,14 +84,6 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
     handlePhoneFieldChange(value: string[]) {
         let newContact = this.state.contact
         newContact.phone = value;
-        this.setState({
-            contact: newContact,
-        });
-    }
-
-    handleBirthdayFieldChange(value: Date) {
-        let newContact = this.state.contact
-        newContact.birthday = value;
         this.setState({
             contact: newContact,
         });
@@ -144,10 +135,6 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                 <StringArrayField
                     label="Phone:" 
                     handleChange={this.handlePhoneFieldChange}
-                />
-                <DateField
-                    label="Birthday:" 
-                    handleChange={this.handleBirthdayFieldChange}
                 />
                 <DateField
                     label="Last Contacted:" 
