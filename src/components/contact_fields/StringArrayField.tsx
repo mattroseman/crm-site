@@ -41,7 +41,6 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
     }
 
     handleDeleteButtonPress(uuid: string) {
-        // TODO remove this element with uuid
         let index = this.state.uuids.findIndex((elementUUID: string) => {
             return elementUUID == uuid;
         });
@@ -68,8 +67,10 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
                                     uuid={this.state.uuids[index]}
                                     initValue={value} 
                                     firstElement={index == 0} 
+                                    includeDeleteButton={this.state.values.length > 1}
                                     handleChange={this.handleArrayFieldElementChange}
-                                    handleButton={index ? this.handleDeleteButtonPress : this.handleAddButtonPress}
+                                    handleAddButton={this.handleAddButtonPress}
+                                    handleDeleteButton={this.handleDeleteButtonPress}
                                     isMultiline={this.props.isMultiline ? true : false}
                                 />
                             );
@@ -85,8 +86,10 @@ interface StringArrayFieldElementProps {
     uuid: string;
     initValue: string;
     firstElement: boolean;
+    includeDeleteButton: boolean;
     handleChange: (uuid: string, newValue: string) => void;
-    handleButton: (uuid: string) => void;
+    handleAddButton: (uuid: string) => void;
+    handleDeleteButton: (uuid: string) => void;
     isMultiline: boolean;
 }
 
@@ -138,16 +141,60 @@ class StringArrayFieldElement extends React.Component<StringArrayFieldElementPro
                 />
             );
         }
+
+        //TODO add icons for the buttons
+        let Buttons: JSX.Element;
+        if (this.props.firstElement) {
+            if (this.props.includeDeleteButton) {
+                Buttons = (
+                    <div className="add-contact-array-field-buttons">
+                        <button
+                            className="add-contact-array-field-button"
+                            type="button"
+                            onClick={() => this.props.handleAddButton(this.props.uuid)}
+                        >
+                        +
+                        </button>
+                        <button
+                            className="add-contact-array-field-button"
+                            type="button"
+                            onClick={() => this.props.handleDeleteButton(this.props.uuid)}
+                        >
+                        x
+                        </button>
+                    </div>
+                );
+            } else {
+                Buttons = (
+                    <div className="add-contact-array-field-buttons">
+                        <button
+                            className="add-contact-array-field-button"
+                            type="button"
+                            onClick={() => this.props.handleAddButton(this.props.uuid)}
+                        >
+                        +
+                        </button>
+                    </div>
+                );
+            }
+        } else {
+            Buttons = (
+                <div className="add-contact-array-field-buttons">
+                    <button
+                        className="add-contact-array-field-button"
+                        type="button"
+                        onClick={() => this.props.handleDeleteButton(this.props.uuid)}
+                    >
+                    x
+                    </button>
+                </div>
+            );
+        }
+
         return (
             <div key={this.props.uuid} className="add-contact-array-field-element">
                 {InputField}
-                <button
-                    className="add-contact-array-field-button"
-                    type="button"
-                    onClick={() => this.props.handleButton(this.props.uuid)}
-                >
-                {this.props.firstElement ? '+' : 'x'}
-                </button>
+                {Buttons}
             </div>
         );
     }

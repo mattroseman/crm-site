@@ -1,7 +1,7 @@
-$primary-color: #553344;
-$secondary-color: #ffaa00;
-$light-grey: #F9F9F8;
-$dark-grey: #45413D;
+$secondary-color: #FCB040;
+$primary-color: #3A53AB;
+$light-grey: #F7F8F9;
+$dark-grey: #363A47;
 $white: #FFFFFF;
 
 /* React Dates */
@@ -104,7 +104,7 @@ input[type="submit"] {
 
 .add-contact-form-title {
     display: flex;
-    color: $secondary-color;
+    color: $dark-grey;
     align-self: center;
 }
 
