@@ -11,8 +11,8 @@ export default class ContactCardList extends React.Component<ContactCardListProp
         const contactList = this.props.contacts.map((contact: Contact) => {
             let fn = contact.firstName;
             let ln = contact.lastName;
-            let email = contact.email[0];
-            let company = contact.company[0];
+            let email = contact.primaryEmail;
+            let company = contact.primaryCompany;
             return (<ContactCard key={fn+ln} firstName={fn} lastName={ln} email={email} company={company}/>);
         });
 

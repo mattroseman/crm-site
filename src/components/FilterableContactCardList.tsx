@@ -26,8 +26,8 @@ export default class FilterableContactCardList extends React.Component<Filterabl
             contacts: search ? this.props.contacts.filter((contact) => { 
                 return (
                     contact.firstName + ' ' + contact.lastName).toUpperCase().indexOf(search.toUpperCase()) !== -1 ||
-                    contact.email[0].toUpperCase().indexOf(search.toUpperCase()) !== -1 ||
-                    contact.company[0].toUpperCase().indexOf(search.toUpperCase()) !== -1;
+                    contact.primaryEmail.toUpperCase().indexOf(search.toUpperCase()) !== -1 ||
+                    contact.primaryCompany.toUpperCase().indexOf(search.toUpperCase()) !== -1;
             }) : this.props.contacts,
         });
     }
