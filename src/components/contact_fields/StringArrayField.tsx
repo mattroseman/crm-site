@@ -1,6 +1,12 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 
+import { PlusSquare } from '../icons';
+import { XSquare } from '../icons';
+
+// import MdAdd from 'react-icons/md/add';
+// import MdRemove from 'react-icons/md/remove';
+
 export interface StringArrayFieldProps {
     label: string;
     handleChange: (value: string[]) => void;
@@ -153,14 +159,14 @@ class StringArrayFieldElement extends React.Component<StringArrayFieldElementPro
                             type="button"
                             onClick={() => this.props.handleAddButton(this.props.uuid)}
                         >
-                        +
+                        	<PlusSquare />
                         </button>
                         <button
                             className="add-contact-array-field-button"
                             type="button"
                             onClick={() => this.props.handleDeleteButton(this.props.uuid)}
                         >
-                        x
+                            <XSquare />
                         </button>
                     </div>
                 );
@@ -172,7 +178,7 @@ class StringArrayFieldElement extends React.Component<StringArrayFieldElementPro
                             type="button"
                             onClick={() => this.props.handleAddButton(this.props.uuid)}
                         >
-                        +
+                            <PlusSquare />
                         </button>
                     </div>
                 );
@@ -185,7 +191,7 @@ class StringArrayFieldElement extends React.Component<StringArrayFieldElementPro
                         type="button"
                         onClick={() => this.props.handleDeleteButton(this.props.uuid)}
                     >
-                    x
+                        <XSquare />
                     </button>
                 </div>
             );

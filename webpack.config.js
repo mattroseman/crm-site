@@ -19,7 +19,7 @@ module.exports = {
             { test: /\.css$/, loader: "style-loader!css-loader" },
             { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+            { enforce: "pre", test: /\.jsx?$/, loader: "source-map-loader" }
         ]
     },
 

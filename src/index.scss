@@ -4,32 +4,13 @@ $light-grey: #F7F8F9;
 $dark-grey: #363A47;
 $white: #FFFFFF;
 
-/* React Dates */
-$react-dates-color-primary: $primary-color;
-$react-dates-color-secondary: $secondary-color;
-$react-dates-color-focus: $secondary-color;
-@import '../node_modules/react-dates/css/variables.scss';
-@import '../node_modules/react-dates/css/styles.scss';
-.SingleDatePickerInput {
-    background-color: $light-grey;
-    border: 0px;
-}
-.SingleDatePickerInput__clear-date:focus,
-.SingleDatePickerInput__clear-date--hover {
-    background: $light-grey;
-}
-.DateInput {
-    background: $light-grey;
-    padding: 0px;
-    font-size: 20px;
-}
-
 html, body, #root {
-  font: 20px "Century Gothic", Futura, sans-serif;
-  color: $dark-grey;
-  background-color: $light-grey;
-  height: 100%;
-  margin: 0;
+    font: 20px "Century Gothic", Futura, sans-serif;
+    color: $dark-grey;
+    background-color: $primary-color;
+    background-image: url(https://www.transparenttextures.com/patterns/egg-shell.png);
+    height: 100%;
+    margin: 0;
 }
 
 input[type="text"], textarea[type="text"] {
@@ -57,7 +38,6 @@ input[type="submit"] {
     align-items: stretch;
     padding: 30px;
     padding-left: 50px;
-    background-color: $primary-color;
 }
 
 /* ContactSearchBar */
@@ -93,13 +73,15 @@ input[type="submit"] {
     background-color: $secondary-color;
 }
 
-/* AddContactForm */
-.add-contact-form {
+/* ContactForm */
+.contact-form {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     background-color: $light-grey;
     padding: 20px;
+    padding-bottom: 40px;
+    overflow-y: scroll;
 }
 
 .add-contact-form-title {
@@ -150,15 +132,49 @@ input[type="submit"] {
     margin-left: 10px;
     height: 30px;
     width: 30px;
-    background-color: $secondary-color;
     align-self: center;
+    justify-content: center;
+    align-items: center;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+
+.add-contact-array-field-button-icon {
 }
 
 .add-contact-submit {
     display: flex;
     align-self: flex-end;
-    height: 45px;
+    min-height: 45px;
     width: 150px;
-    background-color: $secondary-color;
-    outline: 0 !important;
+    color: $secondary-color;
+    background-color: inherit;
+    border: 1px solid $secondary-color;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+/* React Dates */
+$react-dates-color-primary: $primary-color;
+$react-dates-color-secondary: $secondary-color;
+$react-dates-color-focus: $secondary-color;
+@import '../node_modules/react-dates/css/variables.scss';
+@import '../node_modules/react-dates/css/styles.scss';
+.SingleDatePickerInput {
+    background-color: $light-grey;
+    border: 0px;
+}
+.SingleDatePickerInput__clear-date:focus,
+.SingleDatePickerInput__clear-date--hover {
+    background: $light-grey;
+}
+.DateInput {
+    background: $light-grey;
+    padding: 0px;
+    font-size: 20px;
 }

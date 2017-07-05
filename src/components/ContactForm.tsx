@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Contact from '../types/Contact';
 import StringField from './contact_fields/StringField';
-import StringArrayField from './contact_fields/StringArrayField';
-import DateField from './contact_fields/DateField';
-
+import StringArrayField from './contact_fields/StringArrayField'; import DateField from './contact_fields/DateField'; 
 
 export interface ContactFormProps {
     newContact: boolean;
@@ -168,7 +166,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
 
     render() {
         return (
-            <form key={this.state.formKey} className="add-contact-form" onSubmit={this.handleSubmit}>
+            <form key={this.state.formKey} className="contact-form" onSubmit={this.handleSubmit}>
                 <h1 className="add-contact-form-title">{this.state.title}</h1>
                 <StringField
                     label="First Name:" 
@@ -223,7 +221,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                 <input 
                     className="add-contact-submit" 
                     type="submit" 
-                    value="Add Contact" 
+                    value="Save Contact" 
                 />
             </form>
         );
