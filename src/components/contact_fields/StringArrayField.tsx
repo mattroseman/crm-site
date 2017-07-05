@@ -148,7 +148,6 @@ class StringArrayFieldElement extends React.Component<StringArrayFieldElementPro
             );
         }
 
-        //TODO add icons for the buttons
         let Buttons: JSX.Element;
         if (this.props.firstElement) {
             if (this.props.includeDeleteButton) {
