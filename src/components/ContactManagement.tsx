@@ -26,16 +26,16 @@ export default class ContactManagement extends React.Component<ContactManagement
     }
 
 
-    // TODO make this handleEditContact and update a changed contact, or delete it.
+    // TODO check to see if there is an existin gcontact, and if there is 
     handleNewContact(contact: Contact) {
         let newContacts: Contact[] = this.state.contacts;
         newContacts.push(contact);
         this.setState({
             contacts: newContacts,
+            currentlySelectedContact: null,
         });
     }
 
-    // TODO This isn't updating the contactCardList, and might do with the improper Date type instead of Moment
     handleContactCardClick(contact: Contact) {
         this.setState({
             currentlySelectedContact: contact,
@@ -46,7 +46,7 @@ export default class ContactManagement extends React.Component<ContactManagement
         return (
             <div className="contact-management">
                 <ContactForm
-                    key={this.state.currentlySelectedContact ? this.state.currentlySelectedContact.primaryEmail : null}
+                    key={this.state.currentlySelectedContact && this.state.currentlySelectedContact.email.length ? this.state.currentlySelectedContact.email[0] : null}
                     initialContact={this.state.currentlySelectedContact}
                     onSubmit={this.handleNewContact}
                 />

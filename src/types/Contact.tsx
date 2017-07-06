@@ -3,12 +3,9 @@ interface Contact {
     [key: string]: any;
     firstName: string;
     lastName: string;
-    primaryEmail: string;
-    otherEmail?: string[];
-    primaryCompany?: string;
-    otherCompany?: string[];
-    primaryPhone?: string;
-    otherPhone?: string[];
+    email: string[];
+    company?: string[];
+    phone?: string[];
     linkedIn?: string;
     slackServers?: string[];
     lastContacted?: Date;

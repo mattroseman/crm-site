@@ -1,11 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 
-import { PlusSquare } from '../icons';
-import { XSquare } from '../icons';
-
-// import MdAdd from 'react-icons/md/add';
-// import MdRemove from 'react-icons/md/remove';
+import { PlusSquare, XSquare, Star } from '../icons';
 
 export interface StringArrayFieldProps {
     name: string;
@@ -65,16 +61,29 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
     render() {
         return (
             <div className="add-contact-label-field">
-                <label className="add-contact-label">{this.props.label}</label>
+                <div className="add-contact-label add-contact-label-stars">
+                    <div className="add-contact-string-array-label">
+                        <label>{this.props.label}</label>
+                    </div>
+                    <div className="add-contact-stars">
+                        {
+                            this.state.values.map((value: string, index: number) => {
+                                return (
+                                    <Star />
+                                );
+                            })
+                        }
+                    </div>
+                </div>
                 <div className="add-contact-array-fields">
                     {
                         this.state.values.map((value: string, index: number) => {
                             return (
-                                <StringArrayFieldElement 
+                                <StringArrayFieldElement
                                     key={this.state.uuids[index]}
                                     uuid={this.state.uuids[index]}
-                                    initValue={value} 
-                                    firstElement={index == 0} 
+                                    initValue={value}
+                                    firstElement={index == 0}
                                     includeDeleteButton={this.state.values.length > 1}
                                     handleChange={this.handleArrayFieldElementChange}
                                     handleAddButton={this.handleAddButtonPress}

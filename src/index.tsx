@@ -8,20 +8,20 @@ let testContactList = [
     {
         firstName: 'Matthew',
         lastName: 'Roseman',
-        primaryEmail: 'mroseman95@gmail.com',
-        primaryCompany: 'Stohio',
+        email: ['mroseman95@gmail.com'],
+        company: ['Stohio'],
     },
     {
         firstName: 'John',
         lastName: 'Doe',
-        primaryEmail: 'john@doe.com',
-        primaryCompany: 'Google',
+        email: ['john@doe.com'],
+        company: ['Google'],
     },
     {
         firstName: 'Peter',
         lastName: 'Dinklage',
-        primaryEmail: 'foo@bar.com',
-        primaryCompany: 'Microsoft',
+        email: ['foo@bar.com'],
+        company: ['Microsoft'],
     },
 ];
 

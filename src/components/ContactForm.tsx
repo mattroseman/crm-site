@@ -8,18 +8,6 @@ export interface ContactFormProps {
     onSubmit: (contact: Contact) => void;
 }
 
-//export interface ContactFormState {
-//    [key: string]: string
-//    firstName: string;
-//    lastName: string;
-//    email?: string;
-//    company?: string;
-//    phone?: string;
-//    birthday?: string;
-//    lastContacted?: string;
-//    notes?: string;
-//}
-
 export interface ContactFormState {
     title: string;
     formKey: string;
@@ -32,7 +20,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
         this.state = {
             title: props.initialContact ? 'Edit Contact' : 'Add Contact',
             formKey: String((new Date()).getTime() / 1000),
-            contact: props.initialContact ? props.initialContact : { firstName: '', lastName: '', primaryEmail: '' },
+            contact: props.initialContact ? props.initialContact : { firstName: '', lastName: '', email: [''] },
         };
 
 
@@ -52,7 +40,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
 
         // by changing the key of the form it should rerender everything
         this.setState({
-            contact: {firstName: '', lastName: '', primaryEmail: '',},
+            contact: {firstName: '', lastName: '', email: [''],},
             formKey: String((new Date()).getTime() / 1000),
         });
 
@@ -75,40 +63,22 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                     initialValue={this.state.contact.lastName ? this.state.contact.lastName : ''}
                     handleChange={this.handleFieldChange}
                 />
-                <StringField
-                    name="primaryEmail"
+                <StringArrayField
+                    name="email"
                     label="Email:"
-                    initialValue={this.state.contact.primaryEmail ? this.state.contact.primaryEmail : ''}
+                    initialValue={this.state.contact.email ? this.state.contact.email : ['']}
                     handleChange={this.handleFieldChange}
                 />
                 <StringArrayField
-                    name="otherEmail"
-                    label="Other Emails:" 
-                    initialValue={this.state.contact.otherEmail ? this.state.contact.otherEmail : ['']}
-                    handleChange={this.handleFieldChange}
-                />
-                <StringField
-                    name="primaryCompany"
+                    name="company"
                     label="Company:"
-                    initialValue={this.state.contact.primaryCompany ? this.state.contact.primaryCompany : ''}
+                    initialValue={this.state.contact.company ? this.state.contact.company : ['']}
                     handleChange={this.handleFieldChange}
                 />
                 <StringArrayField
-                    name="otherCompany"
-                    label="Other Companies:"
-                    initialValue={this.state.contact.otherCompany ? this.state.contact.otherCompany : ['']}
-                    handleChange={this.handleFieldChange}
-                />
-                <StringField
-                    name="primaryPhone"
-                    label="Phone:"
-                    initialValue={this.state.contact.primaryPhone ? this.state.contact.primaryPhone : ''}
-                    handleChange={this.handleFieldChange}
-                />
-                <StringArrayField
-                    name="otherPhone"
-                    label="Other Phones:" 
-                    initialValue={this.state.contact.otherPhone ? this.state.contact.otherPhone : ['']}
+                    name="phone"
+                    label="Phone Number:" 
+                    initialValue={this.state.contact.phone ? this.state.contact.phone : ['']}
                     handleChange={this.handleFieldChange}
                 />
                 <StringField

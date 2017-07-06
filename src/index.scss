@@ -1,5 +1,7 @@
-$secondary-color: #FCB040;
-$primary-color: #3A53AB;
+//$secondary-color: #FCB040;
+//$primary-color: #3A53AB;
+$primary-color: #4D394B;
+$secondary-color: #4C9689;
 $light-grey: #F7F8F9;
 $dark-grey: #363A47;
 $white: #FFFFFF;
@@ -8,7 +10,8 @@ html, body, #root {
     font: 20px "Century Gothic", Futura, sans-serif;
     color: $dark-grey;
     background-color: $primary-color;
-    background-image: url(https://www.transparenttextures.com/patterns/egg-shell.png);
+    //background-image: url(https://www.transparenttextures.com/patterns/egg-shell.png);
+    background-image: url(/res/egg-shell.png);
     height: 100%;
     margin: 0;
 }
@@ -40,7 +43,7 @@ input[type="submit"] {
     height: 50px;
     width: 100%;
     color: $light-grey;
-    background: rgba(23,33,67,0.8);
+    background: rgba(30,22,29,0.8);
     //box-shadow: 8px 8px 3px #443344;
     //border-bottom: 1px solid $dark-grey;
 }
@@ -155,9 +158,26 @@ input[type="submit"] {
 
 .add-contact-label {
     flex: 4;
-    align-items: center;
-    justify-content: flex-end;
+    align-items: flex-start;
+    justify-content: flex-start;
     padding-right: 10px;
+}
+
+.add-contact-label-stars {
+    justify-content: stretch;
+}
+
+.add-contact-string-array-label {
+    flex: 3;
+}
+
+.add-contact-stars {
+    display: flex;
+    flex: 1;
+    align-self: stretch;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
 }
 
 .add-contact-field {
@@ -178,6 +198,7 @@ input[type="submit"] {
 .add-contact-array-field-element {
     display: flex;
     flex-direction: row;
+    align-items: stretch;
 }
 
 .add-contact-array-field {
