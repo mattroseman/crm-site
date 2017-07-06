@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+
 import './index.scss';
-import ContactManagement from './components/ContactManagement';
+import CRMSite from './components/CRMSite';
 
 let testContactList = [
     {
@@ -25,6 +26,6 @@ let testContactList = [
 ];
 
 ReactDOM.render(
-    <ContactManagement initialContacts={testContactList} />,
+    <CRMSite initialContacts={testContactList} />,
     document.getElementById("root")
 );

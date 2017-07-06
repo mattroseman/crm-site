@@ -1,8 +1,12 @@
 module.exports = {
-    entry: "./src/index.tsx",
+    entry: [
+        "./src/index.tsx",
+        "webpack-dev-server/client?http://localhost:8080",
+        "webpack/hot/only-dev-server",
+    ],
     output: {
-        filename: "bundle.js",
-        path: __dirname + "/dist"
+        publicPath: "http://localhost:8080/",
+        filename: "dist/bundle.js",
     },
 
     // Enable sourcemaps for debugging webpack's output
@@ -15,9 +19,9 @@ module.exports = {
 
     module: {
         rules: [
-            { test: /\.scss$/, loader: "style-loader!css-loader!sass-loader" },
-            { test: /\.css$/, loader: "style-loader!css-loader" },
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+            { test: /\.scss$/, exclude: /(node_modules)/, loader: "style-loader!css-loader!sass-loader" },
+            { test: /\.css$/, exclude: /(node_modules)/, loader: "style-loader!css-loader" },
+            { test: /\.tsx?$/, exclude: /(node_modules)/, loader: "react-hot-loader!awesome-typescript-loader" },
 
             { enforce: "pre", test: /\.jsx?$/, loader: "source-map-loader" }
         ]

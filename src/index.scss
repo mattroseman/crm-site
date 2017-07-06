@@ -21,13 +21,63 @@ input[type="submit"] {
     font-size: 15px;
 }
 
+/* CRMSite */
+.crm-site {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+/* Header */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    color: $light-grey;
+    background: rgba(23,33,67,0.8);
+    //box-shadow: 8px 8px 3px #443344;
+    //border-bottom: 1px solid $dark-grey;
+}
+
+.header-left-side {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-right-side {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.header-title {
+    font: 60px;
+    font-weight: bold;
+}
+
+.header-sign-up, .header-log-in {
+    padding: 5px;
+    margin-right: 20px;
+    border: 2px solid $light-grey;
+    border-radius: 5px;
+}
+
 /* ContactManagement */
 .contact-management {
     display: flex;
     flex-direction: row;
     flex: 1;
     align-items: stretch;
-    height: 100%;
 }
 
 /* FilterableContactCardList */
@@ -37,7 +87,8 @@ input[type="submit"] {
     flex-grow: 1;
     align-items: stretch;
     padding: 30px;
-    padding-left: 50px;
+    //padding-left: 50px;
+    padding-top: 70px;
 }
 
 /* ContactSearchBar */
@@ -57,7 +108,7 @@ input[type="submit"] {
     flex: 1;
     background-color: $light-grey;
     margin-bottom: 10px;
-    box-shadow: 10px 10px 5px #443344;
+    //box-shadow: 10px 10px 5px #443344;
     align-items: stretch;
 }
 
@@ -81,7 +132,9 @@ input[type="submit"] {
     background-color: $light-grey;
     padding: 20px;
     padding-bottom: 40px;
-    overflow-y: scroll;
+    padding-top: 60px;
+    box-shadow: 8px 8px 2px #443344;
+    //overflow-y: scroll;
 }
 
 .add-contact-form-title {
@@ -93,7 +146,7 @@ input[type="submit"] {
 .add-contact-label-field {
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .add-contact-label, .add-contact-field {
@@ -102,7 +155,9 @@ input[type="submit"] {
 
 .add-contact-label {
     flex: 4;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
 }
 
 .add-contact-field {
@@ -111,7 +166,7 @@ input[type="submit"] {
     border: 0;
     outline: 0;
     background: transparent;
-    border-bottom: 1px solid $secondary-color
+    border-bottom: 1px solid $primary-color
 }
 
 .add-contact-array-fields {

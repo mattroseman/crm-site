@@ -77,7 +77,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                 />
                 <StringField
                     name="primaryEmail"
-                    label="Primary Email:"
+                    label="Email:"
                     initialValue={this.state.contact.primaryEmail ? this.state.contact.primaryEmail : ''}
                     handleChange={this.handleFieldChange}
                 />
@@ -89,7 +89,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                 />
                 <StringField
                     name="primaryCompany"
-                    label="Primary Company:"
+                    label="Company:"
                     initialValue={this.state.contact.primaryCompany ? this.state.contact.primaryCompany : ''}
                     handleChange={this.handleFieldChange}
                 />
@@ -101,7 +101,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                 />
                 <StringField
                     name="primaryPhone"
-                    label="Primary Phone:"
+                    label="Phone:"
                     initialValue={this.state.contact.primaryPhone ? this.state.contact.primaryPhone : ''}
                     handleChange={this.handleFieldChange}
                 />
