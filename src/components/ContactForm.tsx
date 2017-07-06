@@ -4,7 +4,6 @@ import StringField from './contact_fields/StringField';
 import StringArrayField from './contact_fields/StringArrayField'; import DateField from './contact_fields/DateField'; 
 
 export interface ContactFormProps {
-    newContact: boolean;
     initialContact?: Contact;
     onSubmit: (contact: Contact) => void;
 }
@@ -31,124 +30,20 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
     constructor(props: ContactFormProps) {
         super(props);
         this.state = {
-            title: props.newContact ? 'Add Contact' : 'Edit Contact',
+            title: props.initialContact ? 'Edit Contact' : 'Add Contact',
             formKey: String((new Date()).getTime() / 1000),
-            contact: props.initialContact ? props.initialContact : { firstName: '', lastName: '' },
+            contact: props.initialContact ? props.initialContact : { firstName: '', lastName: '', primaryEmail: '' },
         };
 
-        this.handleFirstNameFieldChange = this.handleFirstNameFieldChange.bind(this);
-        this.handleLastNameFieldChange = this.handleLastNameFieldChange.bind(this);
-        this.handlePrimaryEmailFieldChange = this.handlePrimaryEmailFieldChange.bind(this);
-        this.handleOtherEmailFieldChange = this.handleOtherEmailFieldChange.bind(this);
-        this.handlePrimaryCompanyFieldChange = this.handlePrimaryCompanyFieldChange.bind(this);
-        this.handleOtherCompanyFieldChange = this.handleOtherCompanyFieldChange.bind(this);
-        this.handlePrimaryPhoneFieldChange = this.handlePrimaryPhoneFieldChange.bind(this);
-        this.handleOtherPhoneFieldChange = this.handleOtherPhoneFieldChange.bind(this);
-        this.handleLinkedInFieldChange = this.handleLinkedInFieldChange.bind(this);
-        this.handleSlackServersChange = this.handleSlackServersChange.bind(this);
-        this.handleLastContactedFieldChange = this.handleLastContactedFieldChange.bind(this);
-        this.handleNotesFieldChange = this.handleNotesFieldChange.bind(this);
 
+        this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // TODO I can't think of a better way of handling the different forms of input here, then to have
-    // a function for each field. It is a bit repetitive, but it works for now.
-    handleFirstNameFieldChange(value: string) {
+    handleFieldChange(name: string, value: any) {
         let newContact = this.state.contact;
-        newContact.firstName = value;
-        this.setState({
-            contact: newContact,
-        });
-    }
-
-    handleLastNameFieldChange(value: string) {
-        let newContact = this.state.contact;
-        newContact.lastName = value;
-        this.setState({
-            contact: newContact,
-        });
-    }
-
-    handlePrimaryEmailFieldChange(value: string) {
-        let newContact = this.state.contact;
-        newContact.primaryEmail = value;
-        this.setState({
-            contact: newContact,
-        });
-    }
-
-    handleOtherEmailFieldChange(value: string[]) {
-        let newContact = this.state.contact;
-        newContact.otherEmail = value;
-        this.setState({
-            contact: newContact,
-        });
-    }
-
-    handlePrimaryCompanyFieldChange(value: string) {
-        let newContact = this.state.contact;
-        newContact.primaryCompany = value;
-        this.setState({
-            contact: newContact,
-        });
-
-    }
-
-    handleOtherCompanyFieldChange(value: string[]) {
-        let newContact = this.state.contact;
-        newContact.otherCompany = value;
-        this.setState({
-            contact: newContact,
-        });
-    }
-
-    handlePrimaryPhoneFieldChange(value: string) {
-        let newContact = this.state.contact;
-        newContact.primaryPhone = value;
-        this.setState({
-            contact: newContact,
-        });
-    }
-
-    handleOtherPhoneFieldChange(value: string[]) {
-        let newContact = this.state.contact;
-        newContact.otherPhone = value;
-        this.setState({
-            contact: newContact,
-        });
-    }
-
-    handleLinkedInFieldChange(value: string) {
-        let newContact = this.state.contact;
-        newContact.linkedIn = value;
-        this.setState({
-            contact: newContact,
-        });
-    }
-
-    handleSlackServersChange(value: string[]) {
-        let newContact = this.state.contact;
-        newContact.slackServers = value;
-        this.setState({
-            contact: newContact,
-        });
-    }
-
-    handleLastContactedFieldChange(value: Date) {
-        let newContact = this.state.contact;
-        newContact.lastContacted = value;
-        this.setState({
-            contact: newContact,
-        });
-    }
-
-    handleNotesFieldChange(value: string[]) {
-        let newContact = this.state.contact
-        newContact.notes = value;
-        this.setState({
-            contact: newContact,
-        });
+        newContact[name] = value;
+        this.setState({ contact: newContact, });
     }
 
     handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -157,7 +52,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
 
         // by changing the key of the form it should rerender everything
         this.setState({
-            contact: {firstName: '', lastName: ''},
+            contact: {firstName: '', lastName: '', primaryEmail: '',},
             formKey: String((new Date()).getTime() / 1000),
         });
 
@@ -169,52 +64,76 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
             <form key={this.state.formKey} className="contact-form" onSubmit={this.handleSubmit}>
                 <h1 className="add-contact-form-title">{this.state.title}</h1>
                 <StringField
+                    name="firstName"
                     label="First Name:" 
-                    handleChange={this.handleFirstNameFieldChange}
+                    initialValue={this.state.contact.firstName ? this.state.contact.firstName : ''}
+                    handleChange={this.handleFieldChange}
                 />
                 <StringField
+                    name="lastName"
                     label="Last Name:" 
-                    handleChange={this.handleLastNameFieldChange}
+                    initialValue={this.state.contact.lastName ? this.state.contact.lastName : ''}
+                    handleChange={this.handleFieldChange}
                 />
                 <StringField
+                    name="primaryEmail"
                     label="Primary Email:"
-                    handleChange={this.handlePrimaryEmailFieldChange}
+                    initialValue={this.state.contact.primaryEmail ? this.state.contact.primaryEmail : ''}
+                    handleChange={this.handleFieldChange}
                 />
                 <StringArrayField
+                    name="otherEmail"
                     label="Other Emails:" 
-                    handleChange={this.handleOtherEmailFieldChange}
+                    initialValue={this.state.contact.otherEmail ? this.state.contact.otherEmail : ['']}
+                    handleChange={this.handleFieldChange}
                 />
                 <StringField
+                    name="primaryCompany"
                     label="Primary Company:"
-                    handleChange={this.handlePrimaryCompanyFieldChange}
+                    initialValue={this.state.contact.primaryCompany ? this.state.contact.primaryCompany : ''}
+                    handleChange={this.handleFieldChange}
                 />
                 <StringArrayField
+                    name="otherCompany"
                     label="Other Companies:"
-                    handleChange={this.handleOtherCompanyFieldChange}
+                    initialValue={this.state.contact.otherCompany ? this.state.contact.otherCompany : ['']}
+                    handleChange={this.handleFieldChange}
                 />
                 <StringField
+                    name="primaryPhone"
                     label="Primary Phone:"
-                    handleChange={this.handlePrimaryPhoneFieldChange}
+                    initialValue={this.state.contact.primaryPhone ? this.state.contact.primaryPhone : ''}
+                    handleChange={this.handleFieldChange}
                 />
                 <StringArrayField
+                    name="otherPhone"
                     label="Other Phones:" 
-                    handleChange={this.handleOtherPhoneFieldChange}
+                    initialValue={this.state.contact.otherPhone ? this.state.contact.otherPhone : ['']}
+                    handleChange={this.handleFieldChange}
                 />
                 <StringField
+                    name="linkedIn"
                     label="LinkedIn:"
-                    handleChange={this.handleLinkedInFieldChange}
+                    initialValue={this.state.contact.linkedIn ? this.state.contact.linkedIn : ''}
+                    handleChange={this.handleFieldChange}
                 />
                 <StringArrayField
+                    name="slackServers"
                     label="Slack Servers:"
-                    handleChange={this.handleSlackServersChange}
+                    initialValue={this.state.contact.slackServers ? this.state.contact.slackServers : ['']}
+                    handleChange={this.handleFieldChange}
                 />
                 <DateField
+                    name="lastContacted"
                     label="Last Contacted:" 
-                    handleChange={this.handleLastContactedFieldChange}
+                    initialValue={this.state.contact.lastContacted ? this.state.contact.lastContacted : null}
+                    handleChange={this.handleFieldChange}
                 />
                 <StringArrayField
+                    name="notes"
                     label="Notes:" 
-                    handleChange={this.handleNotesFieldChange}
+                    initialValue={this.state.contact.notes ? this.state.contact.notes : ['']}
+                    handleChange={this.handleFieldChange}
                     isMultiline
                 />
 

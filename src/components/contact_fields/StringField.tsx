@@ -1,8 +1,10 @@
 import * as React from 'react';
 
 export interface StringFieldProps {
+    name: string;
     label: string;
-    handleChange: (value: string) => void;
+    initialValue: string;
+    handleChange: (name: string, value: string) => void;
 }
 
 export interface StringFieldState {
@@ -12,7 +14,7 @@ export interface StringFieldState {
 export default class StringField extends React.Component<StringFieldProps, StringFieldState> {
     constructor(props: StringFieldProps) {
         super(props);
-        this.state = { value: '', };
+        this.state = { value: props.initialValue, };
     }
 
     render() {
@@ -22,10 +24,11 @@ export default class StringField extends React.Component<StringFieldProps, Strin
                 <input
                     className="add-contact-field"
                     type="text"
+                    value={this.state.value}
                     onChange={(event) => {
                         this.setState({
                             value: event.target.value,
-                        }, () => this.props.handleChange(this.state.value));
+                        }, () => this.props.handleChange(this.props.name, this.state.value));
                     }}
                 />
             </div>

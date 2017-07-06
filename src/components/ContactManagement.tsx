@@ -9,6 +9,7 @@ export interface ContactManagementProps {
 
 export interface ContactManagementState {
     contacts: Contact[];
+    currentlySelectedContact: Contact;
 }
 
 
@@ -17,12 +18,15 @@ export default class ContactManagement extends React.Component<ContactManagement
         super(props);
         this.state = {
             contacts: props.initialContacts,
+            currentlySelectedContact: null,
         };
 
         this.handleNewContact = this.handleNewContact.bind(this);
+        this.handleContactCardClick = this.handleContactCardClick.bind(this);
     }
 
 
+    // TODO make this handleEditContact and update a changed contact, or delete it.
     handleNewContact(contact: Contact) {
         let newContacts: Contact[] = this.state.contacts;
         newContacts.push(contact);
@@ -31,11 +35,22 @@ export default class ContactManagement extends React.Component<ContactManagement
         });
     }
 
+    // TODO This isn't updating the contactCardList, and might do with the improper Date type instead of Moment
+    handleContactCardClick(contact: Contact) {
+        this.setState({
+            currentlySelectedContact: contact,
+        });
+    }
+
     render() {
         return (
             <div className="contact-management">
-                <ContactForm newContact={true} onSubmit={this.handleNewContact} />
-                <FilterableContactCardList contacts={this.state.contacts} />
+                <ContactForm
+                    key={this.state.currentlySelectedContact ? this.state.currentlySelectedContact.primaryEmail : null}
+                    initialContact={this.state.currentlySelectedContact}
+                    onSubmit={this.handleNewContact}
+                />
+                <FilterableContactCardList contacts={this.state.contacts} onContactCardClick={this.handleContactCardClick}/>
             </div>
         );
     }

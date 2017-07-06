@@ -4,8 +4,10 @@ import { SingleDatePicker } from 'react-dates';
 //import 'react-dates/lib/css/_datepicker.css';
 
 export interface DateFieldProps {
+    name: string;
     label: string;
-    handleChange: (value: Date) => void;
+    initialValue?: Date;
+    handleChange: (name: string, value: Date) => void;
 }
 
 export interface DateFieldState {
@@ -16,7 +18,7 @@ export interface DateFieldState {
 export default class DateField extends React.Component<DateFieldProps, DateFieldState> {
     constructor(props: DateFieldProps) {
         super(props);
-        this.state = { value: null, focused: false, };
+        this.state = { value: props.initialValue ? moment(props.initialValue) : null, focused: false, };
     }
 
     //date={null}
@@ -36,7 +38,7 @@ export default class DateField extends React.Component<DateFieldProps, DateField
                         onDateChange={(date) => {
                             this.setState({
                                 value: date,
-                            }, () => {this.props.handleChange(this.state.value.toDate())});
+                            }, () => {this.props.handleChange(this.props.name, this.state.value.toDate())});
                         }}
                         focused={this.state.focused}
                         onFocusChange={(arg: {focused: boolean}) => this.setState({ focused: arg.focused })}

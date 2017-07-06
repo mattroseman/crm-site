@@ -5,6 +5,7 @@ import ContactCardList from './ContactCardList';
 
 export interface FilterableContactCardListProps {
     contacts: Contact[];
+    onContactCardClick: (contact: Contact) => void;
 }
 
 export interface FilterableContactCardListState {
@@ -36,7 +37,7 @@ export default class FilterableContactCardList extends React.Component<Filterabl
         return (
             <div className="filterable-contact-card-list">
                 <ContactSearchBar onChange={this.handleSearchInput}/>
-                <ContactCardList contacts={this.state.contacts} />
+                <ContactCardList contacts={this.state.contacts} onContactCardClick={this.props.onContactCardClick}/>
             </div>
         );
     }

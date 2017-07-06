@@ -8,8 +8,10 @@ import { XSquare } from '../icons';
 // import MdRemove from 'react-icons/md/remove';
 
 export interface StringArrayFieldProps {
+    name: string;
     label: string;
-    handleChange: (value: string[]) => void;
+    initialValue: string[];
+    handleChange: (name: string, value: string[]) => void;
     isMultiline?: boolean;
 }
 
@@ -22,7 +24,7 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
     constructor(props: StringArrayFieldProps) {
         super(props);
         this.state = {
-            values: [''],
+            values: props.initialValue,
             uuids: [_.uniqueId(this.props.label)],
         };
 
@@ -36,7 +38,7 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
             values: this.state.values.map((value: string, index: number) => {
                 return this.state.uuids[index] == uuid ? newValue : value;
             }),
-        });
+        }, () => {this.props.handleChange(this.props.name, this.state.values)});
     }
 
     handleAddButtonPress(uuid: string) {
@@ -133,6 +135,7 @@ class StringArrayFieldElement extends React.Component<StringArrayFieldElementPro
                 <textarea
                     className="add-contact-field add-contact-array-field muliline-array-field"
                     type="text"
+                    value={this.state.value}
                     rows={3}
                     onChange={this.handleTextAreaChange}
                 />
@@ -142,6 +145,7 @@ class StringArrayFieldElement extends React.Component<StringArrayFieldElementPro
                 <input
                     className="add-contact-field add-contact-array-field"
                     type="text"
+                    value={this.state.value}
                     maxLength={30}
                     onChange={this.handleInputChange}
                 />
