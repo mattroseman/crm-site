@@ -25,6 +25,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
 
 
         this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.handleStringArrayFieldChange = this.handleStringArrayFieldChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -37,7 +38,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
     handleStringArrayFieldChange(name: string, value: string[], primaryIndex: number) {
         let newContact = this.state.contact;
         newContact[name] = value;
-        newContact[name + 'Primary'] = primaryIndex;
+        newContact['primary' + name[0].toUpperCase() + name.slice(1)] = primaryIndex;
         this.setState({ contact: newContact, });
     }
 
