@@ -20,7 +20,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
         this.state = {
             title: props.initialContact ? 'Edit Contact' : 'Add Contact',
             formKey: String((new Date()).getTime() / 1000),
-            contact: props.initialContact ? props.initialContact : { firstName: '', lastName: '', email: [''] },
+            contact: props.initialContact ? props.initialContact : { firstName: '', lastName: '', email: [''], primaryEmail: 0 },
         };
 
 
@@ -34,13 +34,20 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
         this.setState({ contact: newContact, });
     }
 
+    handleStringArrayFieldChange(name: string, value: string[], primaryIndex: number) {
+        let newContact = this.state.contact;
+        newContact[name] = value;
+        newContact[name + 'Primary'] = primaryIndex;
+        this.setState({ contact: newContact, });
+    }
+
     handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         // TODO validate all the input before adding it to state
         this.props.onSubmit(this.state.contact);
 
         // by changing the key of the form it should rerender everything
         this.setState({
-            contact: {firstName: '', lastName: '', email: [''],},
+            contact: { firstName: '', lastName: '', email: [''], primaryEmail: 0 },
             formKey: String((new Date()).getTime() / 1000),
         });
 
@@ -67,19 +74,22 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                     name="email"
                     label="Email:"
                     initialValue={this.state.contact.email ? this.state.contact.email : ['']}
-                    handleChange={this.handleFieldChange}
+                    initialPrimaryIndex={this.state.contact.primaryEmail ? this.state.contact.primaryEmail : 0}
+                    handleChange={this.handleStringArrayFieldChange}
                 />
                 <StringArrayField
                     name="company"
                     label="Company:"
                     initialValue={this.state.contact.company ? this.state.contact.company : ['']}
-                    handleChange={this.handleFieldChange}
+                    initialPrimaryIndex={this.state.contact.primaryCompany ? this.state.contact.primaryCompany : 0}
+                    handleChange={this.handleStringArrayFieldChange}
                 />
                 <StringArrayField
                     name="phone"
                     label="Phone Number:" 
                     initialValue={this.state.contact.phone ? this.state.contact.phone : ['']}
-                    handleChange={this.handleFieldChange}
+                    initialPrimaryIndex={this.state.contact.primaryPhone ? this.state.contact.primaryPhone : 0}
+                    handleChange={this.handleStringArrayFieldChange}
                 />
                 <StringField
                     name="linkedIn"
@@ -91,6 +101,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                     name="slackServers"
                     label="Slack Servers:"
                     initialValue={this.state.contact.slackServers ? this.state.contact.slackServers : ['']}
+                    initialPrimaryIndex={this.state.contact.primarySlackServer ? this.state.contact.primarySlackServer : 0}
                     handleChange={this.handleFieldChange}
                 />
                 <DateField
@@ -103,7 +114,8 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                     name="notes"
                     label="Notes:" 
                     initialValue={this.state.contact.notes ? this.state.contact.notes : ['']}
-                    handleChange={this.handleFieldChange}
+                    initialPrimaryIndex={this.state.contact.primaryNote ? this.state.contact.primaryNote : 0}
+                    handleChange={this.handleStringArrayFieldChange}
                     isMultiline
                 />
 

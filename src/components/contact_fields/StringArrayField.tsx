@@ -1,27 +1,33 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 
-import { PlusSquare, XSquare, Star } from '../icons';
+import { PlusSquare, XSquare, Star, FilledStar } from '../icons';
 
 export interface StringArrayFieldProps {
     name: string;
     label: string;
     initialValue: string[];
-    handleChange: (name: string, value: string[]) => void;
+    initialPrimaryIndex: number;
+    handleChange: (name: string, value: string[], primaryIndex: number) => void;
     isMultiline?: boolean;
 }
 
 export interface StringArrayFieldState {
     values: string[];
     uuids: string[];
+    primaryUUID: string;
 }
 
 export default class StringArrayField extends React.Component<StringArrayFieldProps, StringArrayFieldState> {
     constructor(props: StringArrayFieldProps) {
         super(props);
+        let initialUUIDs = props.initialValue.map(() => {
+            return _.uniqueId(this.props.label);
+        });
         this.state = {
             values: props.initialValue,
-            uuids: [_.uniqueId(this.props.label)],
+            uuids: initialUUIDs,
+            primaryUUID: initialUUIDs[props.initialPrimaryIndex],
         };
 
         this.handleArrayFieldElementChange = this.handleArrayFieldElementChange.bind(this);
@@ -34,27 +40,51 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
             values: this.state.values.map((value: string, index: number) => {
                 return this.state.uuids[index] == uuid ? newValue : value;
             }),
-        }, () => {this.props.handleChange(this.props.name, this.state.values)});
+        }, () => {
+            this.props.handleChange(this.props.name, 
+                this.state.values, 
+                this.state.uuids.indexOf(this.state.primaryUUID));
+        });
     }
 
     handleAddButtonPress(uuid: string) {
         this.setState({
-            values: [''].concat(this.state.values),
-            uuids: [_.uniqueId(this.props.label)].concat(this.state.uuids),
+            values: this.state.values.concat(['']),
+            uuids: this.state.uuids.concat([_.uniqueId(this.props.label)]),
+        }, () => {
+            this.props.handleChange(this.props.name, 
+                this.state.values,
+                this.state.uuids.indexOf(this.state.primaryUUID));
         });
     }
 
     handleDeleteButtonPress(uuid: string) {
-        let index = this.state.uuids.findIndex((elementUUID: string) => {
-            return elementUUID == uuid;
-        });
+        let index = this.state.uuids.indexOf(uuid);
         let newValues = this.state.values;
         newValues.splice(index, 1);
         let newUUIDs = this.state.uuids;
         newUUIDs.splice(index, 1);
+        // If the primary UUID is deleted, reset index 0 as primary
         this.setState({
             values: newValues,
             uuids: newUUIDs,
+            primaryUUID: uuid == this.state.primaryUUID ? newUUIDs[0] : this.state.primaryUUID,
+        }, () => {
+            this.props.handleChange(this.props.name,
+                this.state.values,
+                this.state.uuids.indexOf(this.state.primaryUUID));
+        });
+    }
+
+    handleStarIconPress(uuid: string) {
+        // If this uuid is the current primary uuid, then reset the primary uuid to index 0
+        // otherwise set this uuid as the main one
+        this.setState({
+            primaryUUID: this.state.primaryUUID == uuid ? this.state.uuids[0] : uuid,
+        }, () => {
+            this.props.handleChange(this.props.name,
+                this.state.values,
+                this.state.uuids.indexOf(this.state.primaryUUID));
         });
     }
 
@@ -67,10 +97,32 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
                     </div>
                     <div className="add-contact-stars">
                         {
-                            this.state.values.map((value: string, index: number) => {
-                                return (
-                                    <Star />
-                                );
+                            this.state.uuids.map((uuid: string, index: number) => {
+                                if (uuid == this.state.primaryUUID) {
+                                    return (
+                                        <div
+                                            key={uuid}
+                                            className="add-contact-star"
+                                            onClick={() => {
+                                                this.handleStarIconPress(uuid)
+                                            }}
+                                        >
+                                            <FilledStar />
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <div
+                                            key={uuid}
+                                            className="add-contact-star"
+                                            onClick={() => {
+                                                this.handleStarIconPress(uuid)
+                                            }}
+                                        >
+                                            <Star />
+                                        </div>
+                                    );
+                                }
                             })
                         }
                     </div>

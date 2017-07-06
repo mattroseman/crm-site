@@ -46,7 +46,7 @@ export default class ContactManagement extends React.Component<ContactManagement
         return (
             <div className="contact-management">
                 <ContactForm
-                    key={this.state.currentlySelectedContact && this.state.currentlySelectedContact.email.length ? this.state.currentlySelectedContact.email[0] : null}
+                    key={this.state.currentlySelectedContact ? this.state.currentlySelectedContact.email[this.state.currentlySelectedContact.primaryEmail] : null}
                     initialContact={this.state.currentlySelectedContact}
                     onSubmit={this.handleNewContact}
                 />

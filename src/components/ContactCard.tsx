@@ -12,8 +12,8 @@ export default class ContactCard extends React.Component<ContactCardProps, undef
             <div className="contact-card" onClick={() => {this.props.onClick(this.props.contact)}}>
                 <div className="contact-card-info">
                     {this.props.contact.firstName} {this.props.contact.lastName}<br/>
-                    {this.props.contact.email[0]}<br/>
-                    {this.props.contact.company[0]}
+                    {this.props.contact.email[this.props.contact.primaryEmail]}<br/>
+                    {this.props.contact.company[this.props.contact.primaryCompany]}
                 </div>
                 <div className="contact-card-status">
                 </div>
