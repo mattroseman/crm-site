@@ -5,7 +5,7 @@ import ContactCardList from './ContactCardList';
 
 export interface FilterableContactCardListProps {
     contacts: Contact[];
-    onContactCardClick: (contact: Contact) => void;
+    onContactEdit: (contact: Contact) => void;
 }
 
 export interface FilterableContactCardListState {
@@ -23,6 +23,8 @@ export default class FilterableContactCardList extends React.Component<Filterabl
     }
 
     handleSearchInput(search: string) {
+        // TODO search through all emails, not jsut primary
+        // same for company
         this.setState({
             contacts: search ? this.props.contacts.filter((contact) => { 
                 return (
@@ -37,7 +39,7 @@ export default class FilterableContactCardList extends React.Component<Filterabl
         return (
             <div className="filterable-contact-card-list">
                 <ContactSearchBar onChange={this.handleSearchInput}/>
-                <ContactCardList contacts={this.state.contacts} onContactCardClick={this.props.onContactCardClick}/>
+                <ContactCardList contacts={this.state.contacts} onContactCardEdit={this.props.onContactEdit}/>
             </div>
         );
     }

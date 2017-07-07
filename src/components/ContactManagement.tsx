@@ -21,13 +21,13 @@ export default class ContactManagement extends React.Component<ContactManagement
             currentlySelectedContact: null,
         };
 
-        this.handleNewContact = this.handleNewContact.bind(this);
-        this.handleContactCardClick = this.handleContactCardClick.bind(this);
+        this.handleContactFormSubmit = this.handleContactFormSubmit.bind(this);
+        this.handleContactEdit = this.handleContactEdit.bind(this);
     }
 
 
     // TODO check to see if there is an existin gcontact, and if there is 
-    handleNewContact(contact: Contact) {
+    handleContactFormSubmit(contact: Contact) {
         let newContacts: Contact[] = this.state.contacts;
         newContacts.push(contact);
         this.setState({
@@ -36,7 +36,7 @@ export default class ContactManagement extends React.Component<ContactManagement
         });
     }
 
-    handleContactCardClick(contact: Contact) {
+    handleContactEdit(contact: Contact) {
         this.setState({
             currentlySelectedContact: contact,
         });
@@ -48,9 +48,9 @@ export default class ContactManagement extends React.Component<ContactManagement
                 <ContactForm
                     key={this.state.currentlySelectedContact ? this.state.currentlySelectedContact.email[this.state.currentlySelectedContact.primaryEmail] : null}
                     initialContact={this.state.currentlySelectedContact}
-                    onSubmit={this.handleNewContact}
+                    onSubmit={this.handleContactFormSubmit}
                 />
-                <FilterableContactCardList contacts={this.state.contacts} onContactCardClick={this.handleContactCardClick}/>
+                <FilterableContactCardList contacts={this.state.contacts} onContactEdit={this.handleContactEdit}/>
             </div>
         );
     }

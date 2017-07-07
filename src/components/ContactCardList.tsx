@@ -4,7 +4,7 @@ import ContactCard from './ContactCard';
 
 export interface ContactCardListProps {
     contacts: Contact[];
-    onContactCardClick: (contact: Contact) => void;
+    onContactCardEdit: (contact: Contact) => void;
 }
 
 export default class ContactCardList extends React.Component<ContactCardListProps, undefined> {
@@ -14,7 +14,7 @@ export default class ContactCardList extends React.Component<ContactCardListProp
                 <ContactCard 
                     key={contact.firstName + contact.lastName} 
                     contact={contact}
-                    onClick={this.props.onContactCardClick}
+                    onEdit={this.props.onContactCardEdit}
                 />
             );
         });
