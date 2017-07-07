@@ -30,9 +30,14 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
             primaryUUID: initialUUIDs[props.initialPrimaryIndex],
         };
 
+        this.handleStateChange = this.handleStateChange.bind(this);
         this.handleArrayFieldElementChange = this.handleArrayFieldElementChange.bind(this);
         this.handleAddButtonPress = this.handleAddButtonPress.bind(this);
         this.handleDeleteButtonPress = this.handleDeleteButtonPress.bind(this);
+    }
+
+    handleStateChange() {
+        this.props.handleChange(this.props.name, this.state.values, this.state.uuids.indexOf(this.state.primaryUUID));
     }
 
     handleArrayFieldElementChange(uuid: string, newValue: string) {
@@ -40,22 +45,14 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
             values: this.state.values.map((value: string, index: number) => {
                 return this.state.uuids[index] == uuid ? newValue : value;
             }),
-        }, () => {
-            this.props.handleChange(this.props.name, 
-                this.state.values, 
-                this.state.uuids.indexOf(this.state.primaryUUID));
-        });
+        }, this.handleStateChange);
     }
 
     handleAddButtonPress(uuid: string) {
         this.setState({
             values: this.state.values.concat(['']),
             uuids: this.state.uuids.concat([_.uniqueId(this.props.label)]),
-        }, () => {
-            this.props.handleChange(this.props.name, 
-                this.state.values,
-                this.state.uuids.indexOf(this.state.primaryUUID));
-        });
+        }, this.handleStateChange);
     }
 
     handleDeleteButtonPress(uuid: string) {
@@ -69,11 +66,7 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
             values: newValues,
             uuids: newUUIDs,
             primaryUUID: uuid == this.state.primaryUUID ? newUUIDs[0] : this.state.primaryUUID,
-        }, () => {
-            this.props.handleChange(this.props.name,
-                this.state.values,
-                this.state.uuids.indexOf(this.state.primaryUUID));
-        });
+        }, this.handleStateChange);
     }
 
     handleStarIconPress(uuid: string) {
@@ -81,11 +74,7 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
         // otherwise set this uuid as the main one
         this.setState({
             primaryUUID: this.state.primaryUUID == uuid ? this.state.uuids[0] : uuid,
-        }, () => {
-            this.props.handleChange(this.props.name,
-                this.state.values,
-                this.state.uuids.indexOf(this.state.primaryUUID));
-        });
+        }, this.handleStateChange);
     }
 
     render() {
