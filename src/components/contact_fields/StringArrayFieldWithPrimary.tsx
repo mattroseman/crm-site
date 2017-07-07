@@ -2,22 +2,25 @@ import * as React from 'react';
 import * as _ from 'lodash';
 
 import StringArrayFieldElement from './StringArrayFieldElement';
+import { Star, FilledStar } from '../icons';
 
-export interface StringArrayFieldProps {
+export interface StringArrayFieldWithPrimaryProps {
     name: string;
     label: string;
     initialValue: string[];
-    handleChange: (name: string, value: string[]) => void;
+    initialPrimaryIndex: number;
+    handleChange: (name: string, value: string[], primaryIndex: number) => void;
     isMultiline?: boolean;
 }
 
-export interface StringArrayFieldState {
+export interface StringArrayFieldWithPrimaryState {
     values: string[];
     uuids: string[];
+    primaryUUID: string;
 }
 
-export default class StringArrayField extends React.Component<StringArrayFieldProps, StringArrayFieldState> {
-    constructor(props: StringArrayFieldProps) {
+export default class StringArrayFieldWithPrimary extends React.Component<StringArrayFieldWithPrimaryProps, StringArrayFieldWithPrimaryState> {
+    constructor(props: StringArrayFieldWithPrimaryProps) {
         super(props);
         let initialUUIDs = props.initialValue.map(() => {
             return _.uniqueId(this.props.label);
@@ -25,7 +28,8 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
         this.state = {
             values: props.initialValue,
             uuids: initialUUIDs,
-        }
+            primaryUUID: initialUUIDs[props.initialPrimaryIndex],
+        };
 
         this.handleStateChange = this.handleStateChange.bind(this);
         this.handleArrayFieldElementChange = this.handleArrayFieldElementChange.bind(this);
@@ -34,13 +38,13 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
     }
 
     handleStateChange() {
-        this.props.handleChange(this.props.name, this.state.values);
+        this.props.handleChange(this.props.name, this.state.values, this.state.uuids.indexOf(this.state.primaryUUID));
     }
 
     handleArrayFieldElementChange(uuid: string, newValue: string) {
         this.setState({
             values: this.state.values.map((value: string, index: number) => {
-                return this.state.uuids[index] == uuid ? newValue: value;
+                return this.state.uuids[index] == uuid ? newValue : value;
             }),
         }, this.handleStateChange);
     }
@@ -58,9 +62,19 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
         newValues.splice(index, 1);
         let newUUIDs = this.state.uuids;
         newUUIDs.splice(index, 1);
+        // If the primary UUID is deleted, reset index 0 as primary
         this.setState({
             values: newValues,
             uuids: newUUIDs,
+            primaryUUID: uuid == this.state.primaryUUID ? newUUIDs[0] : this.state.primaryUUID,
+        }, this.handleStateChange);
+    }
+
+    handleStarIconPress(uuid: string) {
+        // If this uuid is the current primary uuid, then reset the primary uuid to index 0
+        // otherwise set this uuid as the main one
+        this.setState({
+            primaryUUID: this.state.primaryUUID == uuid ? this.state.uuids[0] : uuid,
         }, this.handleStateChange);
     }
 
@@ -72,7 +86,35 @@ export default class StringArrayField extends React.Component<StringArrayFieldPr
                         <label>{this.props.label}</label>
                     </div>
                     <div className="add-contact-stars">
-                        <div className="add-contact-star" />
+                        {
+                            this.state.uuids.map((uuid: string, index: number) => {
+                                if (uuid == this.state.primaryUUID) {
+                                    return (
+                                        <div
+                                            key={uuid}
+                                            className="add-contact-star"
+                                            onClick={() => {
+                                                this.handleStarIconPress(uuid)
+                                            }}
+                                        >
+                                            <FilledStar />
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <div
+                                            key={uuid}
+                                            className="add-contact-star"
+                                            onClick={() => {
+                                                this.handleStarIconPress(uuid)
+                                            }}
+                                        >
+                                            <Star />
+                                        </div>
+                                    );
+                                }
+                            })
+                        }
                     </div>
                 </div>
                 <div className="add-contact-array-fields">

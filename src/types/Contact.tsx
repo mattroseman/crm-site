@@ -11,10 +11,8 @@ interface Contact {
     primaryPhone?: number;
     linkedIn?: string;
     slackServers?: string[];
-    primarySlackServers?: number;
     lastContacted?: Date;
     notes?: string[];
-    primaryNotes?: number;
 }
 
 export default Contact;
