@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Contact from '../types/Contact';
+import Contact from '../../types/Contact';
 import ContactSearchBar from './ContactSearchBar';
 import ContactCardList from './ContactCardList';
 

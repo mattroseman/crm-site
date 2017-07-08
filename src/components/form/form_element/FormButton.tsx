@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PlusSquare, XSquare } from '../icons';
+import { PlusSquare, XSquare } from '../../icons';
 
 export interface FormButtonProps {
     isAddButton?: boolean;

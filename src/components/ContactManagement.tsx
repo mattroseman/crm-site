@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Contact from '../types/Contact';
-import FilterableContactCardList from './FilterableContactCardList';
-import ContactForm from './ContactForm';
+import FilterableContactCardList from './contact_list/FilterableContactCardList';
+import ContactForm from './form/ContactForm';
 
 export interface ContactManagementProps {
     initialContacts: Contact[];

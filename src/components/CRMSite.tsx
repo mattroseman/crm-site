@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Contact from '../types/Contact';
-import Header from './Header';
+import Header from './header/Header';
 import ContactManagement from './ContactManagement';
 
 export interface CRMSiteProps {

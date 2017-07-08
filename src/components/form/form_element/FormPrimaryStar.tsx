@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Star, FilledStar } from '../icons';
+import { Star, FilledStar } from '../../icons';
 
 export interface FormPrimaryStarProps {
     filled: boolean;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Contact from '../types/Contact';
+import Contact from '../../types/Contact';
 import FormElement from './form_element/FormElement';
 
 export interface ContactFormProps {

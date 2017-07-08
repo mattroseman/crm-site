@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Contact from '../types/Contact';
+import Contact from '../../types/Contact';
 import ContactCard from './ContactCard';
 
 export interface ContactCardListProps {
