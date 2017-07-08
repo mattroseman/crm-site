@@ -1,9 +1,6 @@
 import * as React from 'react';
 import Contact from '../types/Contact';
-import StringField from './contact_fields/StringField';
-import StringArrayFieldWithPrimary from './contact_fields/StringArrayFieldWithPrimary'; 
-import StringArrayField from './contact_fields/StringArrayField';
-import DateField from './contact_fields/DateField'; 
+import FormElement from './form_element/FormElement';
 
 export interface ContactFormProps {
     initialContact?: Contact;
@@ -27,8 +24,9 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
 
 
         this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.handleStringArrayFieldChange = this.handleStringArrayFieldChange.bind(this);
+        this.handleMultiFieldChange = this.handleMultiFieldChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.resetForm = this.resetForm.bind(this);
     }
 
     handleFieldChange(name: string, value: any) {
@@ -37,7 +35,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
         this.setState({ contact: newContact, });
     }
 
-    handleStringArrayFieldChange(name: string, value: string[], primaryIndex: number) {
+    handleMultiFieldChange(name: string, value: string[], primaryIndex: number) {
         let newContact = this.state.contact;
         newContact[name] = value;
         newContact['primary' + name[0].toUpperCase() + name.slice(1)] = primaryIndex;
@@ -48,80 +46,94 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
         // TODO validate all the input before adding it to state
         this.props.onSubmit(this.state.contact);
 
+        // reset the form
+        this.resetForm();
+
+        event.preventDefault();
+    }
+
+    resetForm() {
         // by changing the key of the form it should rerender everything
         this.setState({
             contact: { firstName: '', lastName: '', email: [''], primaryEmail: 0 },
             formKey: String((new Date()).getTime() / 1000),
         });
-
-        event.preventDefault();
     }
 
     render() {
         return (
-            <form key={this.state.formKey} className="contact-form" onSubmit={this.handleSubmit}>
-                <h1 className="add-contact-form-title">{this.state.title}</h1>
-                <StringField
+            <form key={this.state.formKey} className="form" onSubmit={this.handleSubmit}>
+                <h1 className="form__title">{this.state.title}</h1>
+                <FormElement
                     name="firstName"
-                    label="First Name:" 
+                    label="First Name:"
                     initialValue={this.state.contact.firstName ? this.state.contact.firstName : ''}
-                    handleChange={this.handleFieldChange}
+                    onChange={this.handleFieldChange}
                 />
-                <StringField
+                <FormElement
                     name="lastName"
-                    label="Last Name:" 
+                    label="Last Name:"
                     initialValue={this.state.contact.lastName ? this.state.contact.lastName : ''}
-                    handleChange={this.handleFieldChange}
+                    onChange={this.handleFieldChange}
                 />
-                <StringArrayFieldWithPrimary
+                <FormElement
                     name="email"
                     label="Email:"
                     initialValue={this.state.contact.email ? this.state.contact.email : ['']}
+                    hasMultipleFields
+                    hasPrimaryIdentifier
                     initialPrimaryIndex={this.state.contact.primaryEmail ? this.state.contact.primaryEmail : 0}
-                    handleChange={this.handleStringArrayFieldChange}
+                    onChange={this.handleMultiFieldChange}
                 />
-                <StringArrayFieldWithPrimary
+                <FormElement
                     name="company"
                     label="Company:"
                     initialValue={this.state.contact.company ? this.state.contact.company : ['']}
+                    hasMultipleFields
+                    hasPrimaryIdentifier
                     initialPrimaryIndex={this.state.contact.primaryCompany ? this.state.contact.primaryCompany : 0}
-                    handleChange={this.handleStringArrayFieldChange}
+                    onChange={this.handleMultiFieldChange}
                 />
-                <StringArrayFieldWithPrimary
+                <FormElement
                     name="phone"
-                    label="Phone Number:" 
+                    label="Phone Number:"
                     initialValue={this.state.contact.phone ? this.state.contact.phone : ['']}
+                    hasMultipleFields
+                    hasPrimaryIdentifier
                     initialPrimaryIndex={this.state.contact.primaryPhone ? this.state.contact.primaryPhone : 0}
-                    handleChange={this.handleStringArrayFieldChange}
+                    onChange={this.handleMultiFieldChange}
                 />
-                <StringField
+                <FormElement
                     name="linkedIn"
                     label="LinkedIn:"
                     initialValue={this.state.contact.linkedIn ? this.state.contact.linkedIn : ''}
-                    handleChange={this.handleFieldChange}
+                    onChange={this.handleFieldChange}
                 />
-                <StringArrayField
+                <FormElement
                     name="slackServers"
                     label="Slack Servers:"
                     initialValue={this.state.contact.slackServers ? this.state.contact.slackServers : ['']}
-                    handleChange={this.handleFieldChange}
+                    hasMultipleFields
+                    onChange={this.handleMultiFieldChange}
                 />
-                <DateField
+                <FormElement
                     name="lastContacted"
-                    label="Last Contacted:" 
+                    label="Last Contacted:"
                     initialValue={this.state.contact.lastContacted ? this.state.contact.lastContacted : null}
-                    handleChange={this.handleFieldChange}
+                    isDateField
+                    onChange={this.handleFieldChange}
                 />
-                <StringArrayField
+                <FormElement
                     name="notes"
-                    label="Notes:" 
+                    label="Notes:"
                     initialValue={this.state.contact.notes ? this.state.contact.notes : ['']}
-                    handleChange={this.handleFieldChange}
+                    hasMultipleFields
                     isMultiline
+                    onChange={this.handleMultiFieldChange}
                 />
 
                 <input 
-                    className="add-contact-submit" 
+                    className="form__submit" 
                     type="submit" 
                     value="Save Contact" 
                 />

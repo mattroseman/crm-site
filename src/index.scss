@@ -115,20 +115,20 @@ input[type="submit"] {
     align-items: stretch;
 }
 
-.contact-card-info {
+.contact-card__info {
     display: flex;
     flex: 3;
     padding: 10px;
 }
 
-.contact-card-status {
+.contact-card__status {
     display: flex;
     flex: 1;
     background-color: $secondary-color;
 }
 
 /* ContactForm */
-.contact-form {
+.form {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -137,50 +137,53 @@ input[type="submit"] {
     padding-bottom: 40px;
     padding-top: 60px;
     box-shadow: 8px 8px 2px #443344;
-    //overflow-y: scroll;
+    overflow-y: scroll;
 }
 
-.add-contact-form-title {
+.form__title {
     display: flex;
     color: $dark-grey;
     align-self: center;
 }
 
-.add-contact-label-field {
+.form__element {
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
 }
 
-.add-contact-label, .add-contact-field {
+.form__element-label {
     display: flex;
-}
-
-.add-contact-label {
     flex: 4;
     align-items: flex-start;
     justify-content: flex-start;
-    padding-right: 10px;
 }
 
-.add-contact-label-stars {
-    justify-content: stretch;
-}
-
-.add-contact-string-array-label {
-    flex: 3;
-}
-
-.add-contact-stars {
+.form__element-fields {
     display: flex;
-    flex: 1;
-    align-self: stretch;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-end;
+    flex: 13;
 }
 
-.add-contact-field {
+.form__element-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form__star,
+.form__star--filled {
+    display: flex;
+    align-items: center;
+    min-width: 24px;
+    min-height: 24px;
+    margin-right: 5px;
+}
+
+.form__input,
+.form__input--multiline,
+.form__input--date {
+    display: flex;
     flex: 9;
     align-items: stretch;
     border: 0;
@@ -189,31 +192,21 @@ input[type="submit"] {
     border-bottom: 1px solid $primary-color
 }
 
-.add-contact-array-fields {
-    display: flex;
-    flex: 9;
-    flex-direction: column;
-}
-
-.add-contact-array-field-element {
+.form__buttons {
     display: flex;
     flex-direction: row;
-    align-items: stretch;
-}
-
-.add-contact-array-field {
-}
-
-.add-contact-array-field-buttons {
-    display: flex;
     align-items: center;
+    min-height: 24px;
+    min-width: 24px;
     margin-left: 10px;
 }
 
-.add-contact-array-field-button {
+.form__button {
     display: flex;
     min-height: 24px;
     min-width: 24px;
+    margin: 0px;
+    padding: 0px;
     align-items: center;
     background-color: Transparent;
     background-repeat:no-repeat;
@@ -223,10 +216,8 @@ input[type="submit"] {
     outline:none;
 }
 
-.add-contact-array-field-button-icon {
-}
 
-.add-contact-submit {
+.form__submit {
     display: flex;
     align-self: flex-end;
     min-height: 45px;
