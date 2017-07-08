@@ -27,7 +27,7 @@ input[type="submit"] {
 /* CRMSite */
 .crm-site {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100%;
     width: 100%;
 }
@@ -40,7 +40,7 @@ input[type="submit"] {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 50px;
+    height: 70px;
     width: 100%;
     color: $light-grey;
     background: rgba(30,22,29,0.8);
@@ -49,6 +49,14 @@ input[type="submit"] {
 }
 
 .header__left-side {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header__center {
     display: flex;
     flex-direction: row;
     flex: 1;
@@ -61,6 +69,17 @@ input[type="submit"] {
     flex-direction: row;
     flex: 1;
     justify-content: flex-end;
+    align-items: center;
+}
+
+.header__add-new-contact, .header__add-new-company {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    margin-left: 20px;
+    border: 2px solid $light-grey;
+    border-radius: 5px;
 }
 
 .header__title {
@@ -91,7 +110,7 @@ input[type="submit"] {
     align-items: stretch;
     padding: 30px;
     //padding-left: 50px;
-    padding-top: 70px;
+    padding-top: 90px;
 }
 
 /* ContactSearchBar */
