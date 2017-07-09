@@ -40,7 +40,7 @@ input[type="submit"] {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 70px;
+    height: 50px;
     width: 100%;
     color: $light-grey;
     background: rgba(30,22,29,0.8);
@@ -70,6 +70,10 @@ input[type="submit"] {
     flex: 1;
     justify-content: flex-end;
     align-items: center;
+}
+
+.header__add-new-button-text {
+    margin-right: 8px;
 }
 
 .header__add-new-contact, .header__add-new-company {

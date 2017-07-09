@@ -12,10 +12,12 @@ export default class Header extends React.Component<HeaderProps, undefined> {
             <div className="header">
                 <div className="header__left-side">
                     <div className="header__add-new-contact" onClick={this.props.onNewContact}>
-                        New Contact <Person />
+                        <text className="header__add-new-button-text">New Contact</text>
+                        <Person />
                     </div>
                     <div className="header__add-new-company" onClick={this.props.onNewCompany}>
-                        New Company <Building />
+                        <text className="header__add-new-button-text">New Company</text> 
+                        <Building />
                     </div>
                 </div>
                 <div className="header__center">
