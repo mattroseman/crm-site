@@ -34,17 +34,19 @@ export default class FilterableCardList extends React.Component<FilterableCardLi
 
     contactMatchesSearch(search: string, contact: Contact) {
         return (
-            this.searchMatchesValue(search, (contact.firstName + ' ' + contact.lastName)) ||
-            contact.email.some((email: string) => {return this.searchMatchesValue(search, email);}) ||
-            contact.company.some((company: string) => {return this.searchMatchesValue(search, company);})
+            this.searchMatchesValue(search, 
+                                    (contact.firstName || '') + ' ' +
+                                    (contact.lastName || '')) ||
+            (contact.email && contact.email.some((email: string) => {return this.searchMatchesValue(search, email);})) ||
+            (contact.company && contact.company.some((company: string) => {return this.searchMatchesValue(search, company);}))
         );
     }
 
     companyMatchesSearch(search: string, company: Company) {
         return (
-            this.searchMatchesValue(search, company.name) ||
-            company.email.some((email: string) => {return this.searchMatchesValue(search, email);}) ||
-            this.searchMatchesValue(search, company.website)
+            this.searchMatchesValue(search, company.name || '') ||
+            (company.email && company.email.some((email: string) => {return this.searchMatchesValue(search, email);})) ||
+            this.searchMatchesValue(search, company.website || '')
         );
     }
 
