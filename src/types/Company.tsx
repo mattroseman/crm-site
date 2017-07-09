@@ -1,5 +1,6 @@
 interface Company {
     [key: string]: any;
+    uuid: string;
     name: string;
     website?: string;
     email?: string[];

@@ -94,16 +94,8 @@ input[type="submit"] {
     border-radius: 5px;
 }
 
-/* ContactManagement */
-.contact-management {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-    align-items: stretch;
-}
-
-/* FilterableContactCardList */
-.filterable-contact-card-list {
+/* FilterableCardList */
+.filterable-card-list {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -113,18 +105,18 @@ input[type="submit"] {
     padding-top: 90px;
 }
 
-/* ContactSearchBar */
-.contact-search-bar {
+/* CardListSearchBar */
+.search-bar {
     margin-bottom: 20px;
 }
 
-/* ContactCardList */
-.contact-card-list {
+/* CardList */
+.card-list {
     list-style-type: none;
 }
 
-/* ContactCard */
-.contact-card {
+/* Card */
+.card {
     display: flex;
     flex-direction: row;
     flex: 1;
@@ -134,13 +126,14 @@ input[type="submit"] {
     align-items: stretch;
 }
 
-.contact-card__info {
+.card__info {
     display: flex;
     flex: 3;
+    flex-direction: column;
     padding: 10px;
 }
 
-.contact-card__status {
+.card__status {
     display: flex;
     flex: 1;
     background-color: $secondary-color;

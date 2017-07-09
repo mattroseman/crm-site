@@ -1,6 +1,7 @@
 // TODO add uuid
 interface Contact {
     [key: string]: any;
+    uuid: string;
     firstName: string;
     lastName: string;
     email: string[];

@@ -1,4 +1,6 @@
 import * as React from 'react';
+import * as _ from 'lodash';
+
 import Company from '../../types/Company';
 import FormElement from './form_element/FormElement';
 
@@ -19,8 +21,13 @@ export default class CompanyForm extends React.Component<CompanyFormProps, Compa
         this.state = {
             title: props.initialCompany ? 'Edit Company' : 'Add Company',
             formKey: String((new Date()).getTime() / 1000),
-            company: props.initialCompany ? props.initialCompany : { name: '', },
+            company: props.initialCompany ? props.initialCompany : { uuid: _.uniqueId(), name: '', },
         };
+
+        this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.handleMultiFieldChange = this.handleMultiFieldChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.resetForm = this.resetForm.bind(this);
     }
 
     handleFieldChange(name: string, value: any) {
@@ -49,7 +56,7 @@ export default class CompanyForm extends React.Component<CompanyFormProps, Compa
     resetForm() {
         // by changing the key of the form it should rerender everything
         this.setState({
-            company: { name: '', },
+            company: { uuid: _.uniqueId(), name: '', },
             formKey: String((new Date()).getTime() / 1000),
         });
     }

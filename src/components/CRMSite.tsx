@@ -2,7 +2,7 @@ import * as React from 'react';
 import Contact from '../types/Contact';
 import Company from '../types/Company';
 import Header from './header/Header';
-import FilterableContactCardList from './contact_list/FilterableContactCardList';
+import FilterableCardList from './card_list/FilterableCardList';
 import ContactForm from './form/ContactForm';
 import CompanyForm from './form/CompanyForm';
 
@@ -30,7 +30,7 @@ export default class CRMSite extends React.Component<CRMSiteProps, CRMSiteState>
             isCurrentFormContact: true,
         };
 
-        this.handleContactFormSubmit = this.handleCompanyFormSubmit.bind(this);
+        this.handleContactFormSubmit = this.handleContactFormSubmit.bind(this);
         this.handleContactEdit = this.handleContactEdit.bind(this);
         this.handleNewContact = this.handleNewContact.bind(this);
 
@@ -39,9 +39,18 @@ export default class CRMSite extends React.Component<CRMSiteProps, CRMSiteState>
         this.handleNewCompany = this.handleNewCompany.bind(this);
     }
 
-    // TODO check to see if there is an existin gcontact, and if there is 
     handleContactFormSubmit(contact: Contact) {
         let newContacts: Contact[] = this.state.contacts;
+        for (let i = 0; i < newContacts.length; i++) {
+            if (newContacts[i].uuid == contact.uuid) {
+                newContacts[i] = contact;
+                this.setState({
+                    contacts: newContacts,
+                    currentlySelectedContact: null,
+                });
+                return;
+            }
+        }
         newContacts.push(contact);
         this.setState({
             contacts: newContacts,
@@ -52,6 +61,7 @@ export default class CRMSite extends React.Component<CRMSiteProps, CRMSiteState>
     handleContactEdit(contact: Contact) {
         this.setState({
             currentlySelectedContact: contact,
+            isCurrentFormContact: true,
         });
     }
 
@@ -63,7 +73,17 @@ export default class CRMSite extends React.Component<CRMSiteProps, CRMSiteState>
     }
 
     handleCompanyFormSubmit(company: Company) {
-        let newCompanies: Company[] = this.state.companies;
+        let newCompanies = this.state.companies;
+        for (let i = 0; i < newCompanies.length; i++) {
+            if (newCompanies[i].uuid == company.uuid) {
+                newCompanies[i] = company;
+                this.setState({
+                    companies: newCompanies,
+                    currentlySelectedCompany: null,
+                });
+                return;
+            }
+        }
         newCompanies.push(company);
         this.setState({
             companies: newCompanies,
@@ -74,6 +94,7 @@ export default class CRMSite extends React.Component<CRMSiteProps, CRMSiteState>
     handleCompanyEdit(company: Company) {
         this.setState({
             currentlySelectedCompany: company,
+            isCurrentFormContact: false,
         });
     }
 
@@ -89,7 +110,7 @@ export default class CRMSite extends React.Component<CRMSiteProps, CRMSiteState>
         if (this.state.isCurrentFormContact) {
             form = (
                 <ContactForm
-                    key={this.state.currentlySelectedContact ? this.state.currentlySelectedContact.email[this.state.currentlySelectedContact.primaryEmail] : null}
+                    key={this.state.currentlySelectedContact ? this.state.currentlySelectedContact.uuid : null}
                     initialContact={this.state.currentlySelectedContact}
                     onSubmit={this.handleContactFormSubmit}
                 />
@@ -107,7 +128,12 @@ export default class CRMSite extends React.Component<CRMSiteProps, CRMSiteState>
             <div className="crm-site">
                 <Header onNewContact={this.handleNewContact} onNewCompany={this.handleNewCompany} />
                 {form}
-                <FilterableContactCardList contacts={this.state.contacts} onContactEdit={this.handleContactEdit}/>
+                <FilterableCardList 
+                    contacts={this.state.contacts} 
+                    companies={this.state.companies}
+                    onContactEdit={this.handleContactEdit}
+                    onCompanyEdit={this.handleCompanyEdit}
+                />
             </div>
         );
     }

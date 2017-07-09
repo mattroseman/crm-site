@@ -1,22 +1,27 @@
 import * as React from 'react';
 import Contact from '../../types/Contact';
-import ContactSearchBar from './ContactSearchBar';
-import ContactCardList from './ContactCardList';
+import Company from '../../types/Company';
+import CardListSearchBar from './CardListSearchBar';
+import CardList from './CardList';
 
-export interface FilterableContactCardListProps {
+export interface FilterableCardListProps {
     contacts: Contact[];
+    companies: Company[];
     onContactEdit: (contact: Contact) => void;
+    onCompanyEdit: (company: Company) => void;
 }
 
-export interface FilterableContactCardListState {
+export interface FilterableCardListState {
     contacts: Contact[];
+    companies: Company[];
 }
 
-export default class FilterableContactCardList extends React.Component<FilterableContactCardListProps, FilterableContactCardListState> {
-    constructor(props: FilterableContactCardListProps) {
+export default class FilterableCardList extends React.Component<FilterableCardListProps, FilterableCardListState> {
+    constructor(props: FilterableCardListProps) {
         super(props);
         this.state = {
-            contacts: this.props.contacts,
+            contacts: props.contacts,
+            companies: props.companies,
         };
 
         this.handleSearchInput = this.handleSearchInput.bind(this);
@@ -37,9 +42,14 @@ export default class FilterableContactCardList extends React.Component<Filterabl
 
     render() {
         return (
-            <div className="filterable-contact-card-list">
-                <ContactSearchBar onChange={this.handleSearchInput}/>
-                <ContactCardList contacts={this.state.contacts} onContactCardEdit={this.props.onContactEdit}/>
+            <div className="filterable-card-list">
+                <CardListSearchBar onChange={this.handleSearchInput}/>
+                <CardList 
+                    contacts={this.state.contacts} 
+                    companies={this.state.companies} 
+                    onContactCardEdit={this.props.onContactEdit}
+                    onCompanyCardEdit={this.props.onCompanyEdit}
+                />
             </div>
         );
     }

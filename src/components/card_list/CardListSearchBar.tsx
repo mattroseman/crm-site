@@ -17,7 +17,7 @@ export default class ContactSearchBar extends React.Component<ContactSearchBarPr
     render() {
         return (
             <input 
-                className="contact-search-bar" 
+                className="search-bar" 
                 type="text" 
                 value={this.state.value}
                 onChange={(event) => {

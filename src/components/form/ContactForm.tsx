@@ -1,4 +1,6 @@
 import * as React from 'react';
+import * as _ from 'lodash';
+
 import Contact from '../../types/Contact';
 import FormElement from './form_element/FormElement';
 
@@ -8,7 +10,6 @@ export interface ContactFormProps {
 }
 
 export interface ContactFormState {
-    title: string;
     formKey: string;
     contact: Contact;
 }
@@ -17,9 +18,8 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
     constructor(props: ContactFormProps) {
         super(props);
         this.state = {
-            title: props.initialContact ? 'Edit Contact' : 'Add Contact',
             formKey: String((new Date()).getTime() / 1000),
-            contact: props.initialContact ? props.initialContact : { firstName: '', lastName: '', email: [''], primaryEmail: 0 },
+            contact: props.initialContact ? props.initialContact : { uuid: _.uniqueId(), firstName: '', lastName: '', email: [''], primaryEmail: 0 },
         };
 
 
@@ -55,7 +55,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
     resetForm() {
         // by changing the key of the form it should rerender everything
         this.setState({
-            contact: { firstName: '', lastName: '', email: [''], primaryEmail: 0 },
+            contact: { uuid: _.uniqueId(), firstName: '', lastName: '', email: [''], primaryEmail: 0 },
             formKey: String((new Date()).getTime() / 1000),
         });
     }
@@ -63,7 +63,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
     render() {
         return (
             <form key={this.state.formKey} className="form" onSubmit={this.handleSubmit}>
-                <h1 className="form__title">{this.state.title}</h1>
+                <h1 className="form__title">{this.props.initialContact ? 'Edit Contact' : 'Add Contact'}</h1>
                 <FormElement
                     name="firstName"
                     label="First Name:"
