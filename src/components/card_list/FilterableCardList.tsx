@@ -27,16 +27,35 @@ export default class FilterableCardList extends React.Component<FilterableCardLi
         this.handleSearchInput = this.handleSearchInput.bind(this);
     }
 
+    // searchMatchesValue checks to see if the query string is found in the value string, ignoreing case
+    searchMatchesValue(search: string, value: string) {
+        return value.toUpperCase().indexOf(search.toUpperCase()) !== -1;
+    }
+
+    contactMatchesSearch(search: string, contact: Contact) {
+        return (
+            this.searchMatchesValue(search, (contact.firstName + ' ' + contact.lastName)) ||
+            contact.email.some((email: string) => {return this.searchMatchesValue(search, email);}) ||
+            contact.company.some((company: string) => {return this.searchMatchesValue(search, company);})
+        );
+    }
+
+    companyMatchesSearch(search: string, company: Company) {
+        return (
+            this.searchMatchesValue(search, company.name) ||
+            company.email.some((email: string) => {return this.searchMatchesValue(search, email);}) ||
+            this.searchMatchesValue(search, company.website)
+        );
+    }
+
     handleSearchInput(search: string) {
-        // TODO search through all emails, not jsut primary
-        // same for company
         this.setState({
             contacts: search ? this.props.contacts.filter((contact) => { 
-                return (
-                    contact.firstName + ' ' + contact.lastName).toUpperCase().indexOf(search.toUpperCase()) !== -1 ||
-                    contact.email[contact.primaryEmail].toUpperCase().indexOf(search.toUpperCase()) !== -1 ||
-                    contact.company[contact.primaryCompany].toUpperCase().indexOf(search.toUpperCase()) !== -1;
+                return this.contactMatchesSearch(search, contact);
             }) : this.props.contacts,
+            companies: search ? this.props.companies.filter((company) => {
+                return this.companyMatchesSearch(search, company);
+            }) : this.props.companies,
         });
     }
 

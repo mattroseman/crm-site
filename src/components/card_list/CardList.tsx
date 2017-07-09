@@ -29,7 +29,7 @@ export default class CardList extends React.Component<CardListProps, undefined> 
                     cardInfo={[
                         company.name ? company.name : '',
                         company.website ? company.website : '',
-                        company.email && company.primaryEmail ? company.email[company.primaryEmail] : '',
+                        company.email ? company.email[company.primaryEmail] : '',
                     ]}
                     onEdit={() => this.props.onCompanyCardEdit(company)}
                 />
