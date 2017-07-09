@@ -19,7 +19,7 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
         super(props);
         this.state = {
             formKey: String((new Date()).getTime() / 1000),
-            contact: props.initialContact ? props.initialContact : { uuid: _.uniqueId(), firstName: '', lastName: '', email: [''], primaryEmail: 0 },
+            contact: props.initialContact || { uuid: _.uniqueId(), firstName: '', lastName: '', email: [''], primaryEmail: 0 },
         };
 
 
@@ -67,66 +67,66 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                 <FormElement
                     name="firstName"
                     label="First Name:"
-                    initialValue={this.state.contact.firstName ? this.state.contact.firstName : ''}
+                    initialValue={this.state.contact.firstName || ''}
                     onChange={this.handleFieldChange}
                 />
                 <FormElement
                     name="lastName"
                     label="Last Name:"
-                    initialValue={this.state.contact.lastName ? this.state.contact.lastName : ''}
+                    initialValue={this.state.contact.lastName || ''}
                     onChange={this.handleFieldChange}
                 />
                 <FormElement
                     name="email"
                     label="Email:"
-                    initialValue={this.state.contact.email ? this.state.contact.email : ['']}
+                    initialValue={this.state.contact.email || ['']}
                     hasMultipleFields
                     hasPrimaryIdentifier
-                    initialPrimaryIndex={this.state.contact.primaryEmail ? this.state.contact.primaryEmail : 0}
+                    initialPrimaryIndex={this.state.contact.primaryEmail || 0}
                     onChange={this.handleMultiFieldChange}
                 />
                 <FormElement
                     name="company"
                     label="Company:"
-                    initialValue={this.state.contact.company ? this.state.contact.company : ['']}
+                    initialValue={this.state.contact.company || ['']}
                     hasMultipleFields
                     hasPrimaryIdentifier
-                    initialPrimaryIndex={this.state.contact.primaryCompany ? this.state.contact.primaryCompany : 0}
+                    initialPrimaryIndex={this.state.contact.primaryCompany || 0}
                     onChange={this.handleMultiFieldChange}
                 />
                 <FormElement
                     name="phone"
                     label="Phone Number:"
-                    initialValue={this.state.contact.phone ? this.state.contact.phone : ['']}
+                    initialValue={this.state.contact.phone || ['']}
                     hasMultipleFields
                     hasPrimaryIdentifier
-                    initialPrimaryIndex={this.state.contact.primaryPhone ? this.state.contact.primaryPhone : 0}
+                    initialPrimaryIndex={this.state.contact.primaryPhone || 0}
                     onChange={this.handleMultiFieldChange}
                 />
                 <FormElement
                     name="linkedIn"
                     label="LinkedIn:"
-                    initialValue={this.state.contact.linkedIn ? this.state.contact.linkedIn : ''}
+                    initialValue={this.state.contact.linkedIn || ''}
                     onChange={this.handleFieldChange}
                 />
                 <FormElement
                     name="slackServers"
                     label="Slack Servers:"
-                    initialValue={this.state.contact.slackServers ? this.state.contact.slackServers : ['']}
+                    initialValue={this.state.contact.slackServers || ['']}
                     hasMultipleFields
                     onChange={this.handleMultiFieldChange}
                 />
                 <FormElement
                     name="lastContacted"
                     label="Last Contacted:"
-                    initialValue={this.state.contact.lastContacted ? this.state.contact.lastContacted : null}
+                    initialValue={this.state.contact.lastContacted || null}
                     isDateField
                     onChange={this.handleFieldChange}
                 />
                 <FormElement
                     name="notes"
                     label="Notes:"
-                    initialValue={this.state.contact.notes ? this.state.contact.notes : ['']}
+                    initialValue={this.state.contact.notes || ['']}
                     hasMultipleFields
                     isMultiline
                     onChange={this.handleMultiFieldChange}
