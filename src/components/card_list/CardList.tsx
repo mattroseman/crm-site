@@ -15,8 +15,12 @@ export default class CardList extends React.Component<CardListProps, undefined> 
         const contactList = this.props.contacts.map((contact: Contact) => {
             return (
                 <Card 
-                    key={contact.firstName + contact.lastName} 
-                    cardInfo={[contact.firstName + ' ' + contact.lastName, contact.email[contact.primaryEmail], contact.company[contact.primaryCompany]]}
+                    key={contact.uuid} 
+                    cardInfo={[
+                        (contact.firstName ? contact.firstName : '') + ' ' + (contact.lastName ? contact.lastName : ''),
+                        contact.email ? contact.email[contact.primaryEmail] : '',
+                        contact.company ? contact.company[contact.primaryCompany] : ''
+                    ]}
                     onEdit={() => this.props.onContactCardEdit(contact)}
                 />
             );
