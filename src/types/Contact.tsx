@@ -10,8 +10,7 @@ interface Contact {
     primaryCompany?: number;
     phone?: string[];
     primaryPhone?: number;
-    linkedIn?: string;
-    slackServers?: string[];
+    websites?: string[];
     lastContacted?: Date;
     notes?: string[];
 }

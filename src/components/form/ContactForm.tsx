@@ -104,15 +104,9 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                     onChange={this.handleMultiFieldChange}
                 />
                 <FormElement
-                    name="linkedIn"
-                    label="LinkedIn:"
-                    initialValue={this.state.contact.linkedIn || ''}
-                    onChange={this.handleFieldChange}
-                />
-                <FormElement
-                    name="slackServers"
-                    label="Slack Servers:"
-                    initialValue={this.state.contact.slackServers || ['']}
+                    name="websites"
+                    label="websites:"
+                    initialValue={this.state.contact.websites || ['']}
                     hasMultipleFields
                     onChange={this.handleMultiFieldChange}
                 />
