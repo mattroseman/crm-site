@@ -115,6 +115,15 @@ export default class ContactForm extends React.Component<ContactFormProps, Conta
                     label="Last Contacted:"
                     initialValue={this.state.contact.lastContacted || null}
                     isDateField
+                    allowPastDates
+                    onChange={this.handleFieldChange}
+                />
+                <FormElement
+                    name="reminder"
+                    label="Reminder:"
+                    initialValue={this.state.contact.reminder || null}
+                    isDateField
+                    allowFutureDates
                     onChange={this.handleFieldChange}
                 />
                 <FormElement

@@ -6,6 +6,8 @@ export interface FormDateInputProps {
     initialDate?: Date;
     initialNote?: string;
     uuid: string;
+    allowPastDates?: boolean;
+    allowFutureDates?: boolean;
     onChange: (newValue: { date: Date, note: string }) => void;
 }
 
@@ -45,7 +47,16 @@ export default class FormDateInput extends React.Component<FormDateInputProps, F
                     showDefaultInputIcon
                     showClearDate
                     date={this.state.date}
-                    isOutsideRange={(date: moment.Moment) => { return date.isAfter(new Date(), 'day'); }}
+                    isOutsideRange={(date: moment.Moment) => { 
+                        let dateAllowed = !date.isSame(new Date(), 'day');
+                        if (this.props.allowFutureDates) {
+                            dateAllowed = dateAllowed && date.isBefore(new Date(), 'day');
+                        }
+                        if (this.props.allowPastDates) {
+                            dateAllowed = dateAllowed && date.isAfter(new Date(), 'day');
+                        }
+                        return dateAllowed;
+                    }}
                     hideKeyboardShortcutsPanel
                     onDateChange={(date) => {
                         this.setState({

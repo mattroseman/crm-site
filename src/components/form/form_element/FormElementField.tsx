@@ -9,6 +9,8 @@ export interface FormElementFieldProps {
     initialValue: any;
     uuid: string;
     isDateField?: boolean;
+    allowPastDates?: boolean;
+    allowFutureDates?: boolean;
     isMultiline?: boolean;
     onInputChange: (uuid: string, newValue: any) => void;
     hasPrimaryIdentifier?: boolean;
@@ -56,6 +58,8 @@ export default class FormElementField extends React.Component<FormElementFieldPr
                 initialDate={this.state.value ? this.state.value.date : null} 
                 initialNote={this.state.value ? this.state.value.note : null}
                 uuid={this.props.uuid} 
+                allowPastDates={this.props.allowPastDates}
+                allowFutureDates={this.props.allowFutureDates}
                 onChange={this.handleInputChange} 
             />
         } else if (this.props.isMultiline) {
