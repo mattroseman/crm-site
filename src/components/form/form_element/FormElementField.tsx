@@ -52,7 +52,12 @@ export default class FormElementField extends React.Component<FormElementFieldPr
     render() {
         let input: JSX.Element;
         if (this.props.isDateField) {
-            input = <FormDateInput initialValue={this.state.value} uuid={this.props.uuid} onChange={this.handleInputChange} />
+            input = <FormDateInput 
+                initialDate={this.state.value ? this.state.value.date : null} 
+                initialNote={this.state.value ? this.state.value.note : null}
+                uuid={this.props.uuid} 
+                onChange={this.handleInputChange} 
+            />
         } else if (this.props.isMultiline) {
             input = <FormMultilineInput initialValue={this.state.value} onChange={this.handleInputChange}/>
         } else {

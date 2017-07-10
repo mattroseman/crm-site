@@ -3,13 +3,15 @@ import * as moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
 
 export interface FormDateInputProps {
-    initialValue?: Date;
+    initialDate?: Date;
+    initialNote?: string;
     uuid: string;
-    onChange: (newValue: Date) => void;
+    onChange: (newValue: { date: Date, note: string }) => void;
 }
 
 export interface FormDateInputState {
-    value: moment.Moment;
+    date: moment.Moment;
+    note: string;
     focused: boolean;
 }
 
@@ -17,7 +19,8 @@ export default class FormDateInput extends React.Component<FormDateInputProps, F
     constructor(props: FormDateInputProps) {
         super(props);
         this.state = {
-            value: props.initialValue ? moment(props.initialValue) : null,
+            date: props.initialDate ? moment(props.initialDate) : null,
+            note: props.initialNote || '',
             focused: false,
         }
     }
@@ -25,19 +28,36 @@ export default class FormDateInput extends React.Component<FormDateInputProps, F
     render() {
         return (
             <div className="form__input--date">
+                <input
+                    className="form__input--date-note"
+                    type="text"
+                    value={this.state.note || ''}
+                    maxLength={40}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        this.setState({
+                            note: event.target.value,
+                        });
+                    }}
+                />
                 <SingleDatePicker
                     id={this.props.uuid}
                     numberOfMonths={1}
                     showDefaultInputIcon
                     showClearDate
-                    date={this.state.value}
+                    date={this.state.date}
                     isOutsideRange={(date: moment.Moment) => { return date.isAfter(new Date(), 'day'); }}
                     hideKeyboardShortcutsPanel
                     onDateChange={(date) => {
                         this.setState({
-                            value: date,
-                        }, () => {this.props.onChange(this.state.value.toDate())});
+                            date: date,
+                        }, () => {
+                            this.props.onChange({ 
+                                date: this.state.date.toDate(), 
+                                note: this.state.note 
+                            });
+                        });
                     }}
+                    anchorDirection="right"
                     focused={this.state.focused}
                     onFocusChange={(arg: {focused: boolean}) => this.setState({ focused: arg.focused })}
                 />

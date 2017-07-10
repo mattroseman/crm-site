@@ -11,7 +11,14 @@ interface Contact {
     phone?: string[];
     primaryPhone?: number;
     websites?: string[];
-    lastContacted?: Date;
+    lastContacted?: {
+        date: Date;
+        note: string;
+    }
+    reminder?: {
+        date: Date;
+        note: string;
+    }
     notes?: string[];
 }
 
