@@ -100,6 +100,15 @@ export default class CompanyForm extends React.Component<CompanyFormProps, Compa
                     label="Last Contacted:"
                     initialValue={this.state.company.lastContacted ? this.state.company.lastContacted : null}
                     isDateField
+                    allowPastDates
+                    onChange={this.handleFieldChange}
+                />
+                <FormElement
+                    name="reminder"
+                    label="Reminder:"
+                    initialValue={this.state.company.reminder || null}
+                    isDateField
+                    allowFutureDates
                     onChange={this.handleFieldChange}
                 />
                 <FormElement

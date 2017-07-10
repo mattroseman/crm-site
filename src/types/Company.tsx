@@ -7,7 +7,14 @@ interface Company {
     primaryEmail?: number;
     phone?: string[];
     primaryPhone?: number;
-    lastContacted?: Date;
+    lastContacted?: {
+        date: Date;
+        note: string;
+    };
+    reminder?: {
+        date: Date;
+        note: string;
+    };
     notes?: string[];
 }
 

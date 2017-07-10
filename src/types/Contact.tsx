@@ -14,11 +14,11 @@ interface Contact {
     lastContacted?: {
         date: Date;
         note: string;
-    }
+    };
     reminder?: {
         date: Date;
         note: string;
-    }
+    };
     notes?: string[];
 }
 
