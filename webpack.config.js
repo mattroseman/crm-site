@@ -1,12 +1,18 @@
-module.exports = {
+var path = require('path');
+
+var BUILD_DIR = path.resolve(__dirname, './build');
+var APP_DIR = path.resolve(__dirname, './src/client');
+
+const config = {
     entry: [
-        "./src/index.tsx",
+        APP_DIR + "/index.tsx",
         "webpack-dev-server/client?http://localhost:8080",
         "webpack/hot/only-dev-server",
     ],
     output: {
         publicPath: "http://localhost:8080/",
-        filename: "dist/bundle.js",
+        filename: "bundle.js",
+        path: BUILD_DIR
     },
 
     // Enable sourcemaps for debugging webpack's output
@@ -34,3 +40,5 @@ module.exports = {
         "react-dom": "ReactDOM"
     },
 };
+
+module.exports = config;

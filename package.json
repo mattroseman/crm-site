@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --hot --progress --colors",
+    "webpack_start": "webpack-dev-server --hot --progress --colors",
+    "start": "nodemon src/server/index.js",
     "build": "webpack --progress -- colors"
   },
   "repository": {
     "type": "git",
-    "url": "crm-site"
+    "url": "git+https://github.com/mroseman95/crm-site"
   },
   "author": "Matthew Roseman",
   "license": "ISC",

@@ -261,8 +261,8 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 $react-dates-color-primary: $primary-color;
 $react-dates-color-secondary: $secondary-color;
 $react-dates-color-focus: $secondary-color;
-@import '../node_modules/react-dates/css/variables.scss';
-@import '../node_modules/react-dates/css/styles.scss';
+@import '../../node_modules/react-dates/css/variables.scss';
+@import '../../node_modules/react-dates/css/styles.scss';
 .SingleDatePicker__picker {
     overflow-x: visible;
 }
