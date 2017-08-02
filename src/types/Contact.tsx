@@ -10,9 +10,15 @@ interface Contact {
     primaryCompany?: number;
     phone?: string[];
     primaryPhone?: number;
-    linkedIn?: string;
-    slackServers?: string[];
-    lastContacted?: Date;
+    websites?: string[];
+    lastContacted?: {
+        date: Date;
+        note: string;
+    };
+    reminder?: {
+        date: Date;
+        note: string;
+    };
     notes?: string[];
 }
 

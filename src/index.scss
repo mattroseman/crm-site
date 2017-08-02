@@ -10,7 +10,6 @@ html, body, #root {
     font: 20px "Century Gothic", Futura, sans-serif;
     color: $dark-grey;
     background-color: $primary-color;
-    //background-image: url(https://www.transparenttextures.com/patterns/egg-shell.png);
     background-image: url(/res/egg-shell.png);
     height: 100%;
     margin: 0;
@@ -158,6 +157,7 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
     padding-top: 60px;
     box-shadow: 8px 8px 2px #443344;
     overflow-y: scroll;
+    //overflow-x: visible;
 }
 
 .form__title {
@@ -202,7 +202,8 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
 
 .form__input,
 .form__input--multiline,
-.form__input--date {
+.form__input--date,
+.form__input--date-note {
     display: flex;
     flex: 9;
     align-items: stretch;
@@ -210,6 +211,11 @@ a[href], input[type='submit'], input[type='image'], label[for], select, button, 
     outline: 0;
     background: transparent;
     border-bottom: 1px solid $primary-color
+}
+
+.form__input--date {
+    justify-content: flex-end;
+    border-bottom: 0px;
 }
 
 .form__buttons {
@@ -257,9 +263,14 @@ $react-dates-color-secondary: $secondary-color;
 $react-dates-color-focus: $secondary-color;
 @import '../node_modules/react-dates/css/variables.scss';
 @import '../node_modules/react-dates/css/styles.scss';
+.SingleDatePicker__picker {
+    overflow-x: visible;
+}
+
 .SingleDatePickerInput {
     background-color: $light-grey;
     border: 0px;
+    border-bottom: 1px solid $primary-color
 }
 .SingleDatePickerInput__clear-date:focus,
 .SingleDatePickerInput__clear-date--hover {

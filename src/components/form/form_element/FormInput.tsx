@@ -22,7 +22,7 @@ export default class FormInput extends React.Component<FormInputProps, FormInput
             <input 
                 className="form__input"
                 type="text"
-                value={this.state.value ? this.state.value : ''}
+                value={this.state.value || ''}
                 maxLength={30}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     this.setState({

@@ -9,6 +9,8 @@ export interface FormElementProps {
     label: string;
     initialValue: any;
     isDateField?: boolean;
+    allowPastDates?: boolean;
+    allowFutureDates?: boolean;
     hasMultipleFields?: boolean;
     hasPrimaryIdentifier?: boolean;
     initialPrimaryIndex?: number;
@@ -44,6 +46,8 @@ export default class FormElement extends React.Component<FormElementProps, FormE
                         initialValue={this.props.initialValue}
                         uuid={this.props.name}
                         isDateField={this.props.isDateField}
+                        allowPastDates={this.props.allowPastDates}
+                        allowFutureDates={this.props.allowFutureDates}
                         isMultiline={this.props.isMultiline}
                         onInputChange={this.props.onChange}
                     />
